@@ -12,43 +12,60 @@
 --------------------------------------------------------------*/
 /* Fonts */
 :root {
-  --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --heading-font: "Raleway",  sans-serif;
-  --nav-font: "Poppins",  sans-serif;
+  --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --heading-font: "Raleway", sans-serif;
+  --nav-font: "Poppins", sans-serif;
 }
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
-:root { 
-  --background-color: #f7f7f7; /* Background color for the entire website, including individual sections */
-  --default-color: #272829; /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #050d18; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #149ddd; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
-  --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
-  --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+:root {
+  /* Modern Dark Theme Palette */
+  --background-color: #0f172a;
+  /* Slate 900 */
+  --default-color: #cbd5e1;
+  /* Slate 300 */
+  --heading-color: #f8fafc;
+  /* Slate 50 */
+  --accent-color: #38bdf8;
+  /* Sky 400 - Vibrant Blue */
+  --surface-color: rgba(30, 41, 59, 0.7);
+  /* Slate 800 with opacity */
+  --contrast-color: #ffffff;
+
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  --glass-backdrop: blur(10px);
 }
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
-  --nav-color: #a8a9b4;  /* The default color of the main navmenu links */
-  --nav-hover-color: #ffffff; /* Applied to main navmenu links when they are hovered over or active */
-  --nav-mobile-background-color: #040b14; /* Used as the background color for mobile navigation menu */
-  --nav-dropdown-background-color: #040b14; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
-  --nav-dropdown-color: #a8a9b4; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #ffffff; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --nav-color: #a8a9b4;
+  /* The default color of the main navmenu links */
+  --nav-hover-color: #ffffff;
+  /* Applied to main navmenu links when they are hovered over or active */
+  --nav-mobile-background-color: #040b14;
+  /* Used as the background color for mobile navigation menu */
+  --nav-dropdown-background-color: #040b14;
+  /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
+  --nav-dropdown-color: #a8a9b4;
+  /* Used for navigation links of the dropdown items in the navigation menu. */
+  --nav-dropdown-hover-color: #ffffff;
+  /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
 
+/* Dark background override (if valid, though we are making dark default) */
 .light-background {
-  --background-color: #f4fafd;
-  --surface-color: #ffffff;
+  --background-color: #1e293b;
+  --surface-color: rgba(51, 65, 85, 0.5);
 }
 
 .dark-background {
-  --background-color: #040b14;
+  --background-color: #020617;
   --default-color: #ffffff;
   --heading-color: #ffffff;
-  --surface-color: #151f2b;
+  --surface-color: rgba(15, 23, 42, 0.8);
   --contrast-color: #ffffff;
 }
 
@@ -144,7 +161,11 @@ h6 {
 --------------------------------------------------------------*/
 .header {
   color: var(--default-color);
-  background-color: var(--background-color);
+  background-color: rgba(15, 23, 42, 0.6);
+  /* Glass effect */
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border-right: var(--glass-border);
   position: fixed;
   top: 0;
   left: 0;
@@ -154,7 +175,6 @@ h6 {
   transition: all ease-in-out 0.3s;
   overflow-y: auto;
   z-index: 997;
-  border-right: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
 }
 
 .header .profile-img img {
@@ -564,7 +584,8 @@ section,
 
 .hero:before {
   content: "";
-  background: color-mix(in srgb, var(--background-color), transparent 70%);
+  background: rgba(2, 6, 23, 0.7);
+  /* Darker overlay for text readability */
   position: absolute;
   inset: 0;
   z-index: 2;
@@ -593,6 +614,28 @@ section,
 
 .hero .social-links {
   margin-top: 25px;
+}
+
+.hero .btn-get-started {
+  margin-top: 30px;
+  display: inline-block;
+  padding: 10px 28px;
+  border-radius: 50px;
+  transition: 0.5s;
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  font-family: var(--heading-font);
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.hero .btn-get-started:hover {
+  background: color-mix(in srgb, var(--accent-color), transparent 20%);
+  color: #fff;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
 }
 
 .hero .social-links a {
@@ -654,6 +697,17 @@ section,
 .stats .stats-item {
   padding: 30px;
   width: 100%;
+  background-color: var(--surface-color);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.stats .stats-item:hover {
+  transform: translateY(-5px);
 }
 
 .stats .stats-item i {
@@ -711,11 +765,35 @@ section,
   height: 10px;
 }
 
-.skills .progress-bar {
-  width: 1px;
-  height: 10px;
-  transition: 0.9s;
-  background-color: var(--accent-color);
+.skills .skill-item {
+  background-color: var(--surface-color);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  transition: 0.3s;
+  height: 100%;
+}
+
+.skills .skill-item:hover {
+  transform: translateY(-5px);
+  background-color: rgba(30, 41, 59, 0.9);
+}
+
+.skills .skill-item i {
+  font-size: 48px;
+  line-height: 1;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.skills .skill-item h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
 }
 
 /*--------------------------------------------------------------
@@ -895,6 +973,20 @@ section,
 --------------------------------------------------------------*/
 .services .service-item {
   position: relative;
+  background-color: var(--surface-color);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  padding: 30px;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  height: 100%;
+}
+
+.services .service-item:hover {
+  transform: translateY(-5px);
+  background-color: rgba(30, 41, 59, 0.9);
 }
 
 .services .service-item .icon {
@@ -957,10 +1049,10 @@ section,
   min-height: 320px;
 }
 
-.testimonials .testimonial-item .testimonial-img {
+.testimonials .testimonial-item .testimonial-img-icon {
   width: 90px;
-  border-radius: 50%;
-  margin: 0 auto;
+  margin: 0 auto 15px auto;
+  color: var(--accent-color);
 }
 
 .testimonials .testimonial-item h3 {
@@ -1043,10 +1135,26 @@ section,
 /*--------------------------------------------------------------
 # Contact Section
 --------------------------------------------------------------*/
-.contact .info-wrap {
+.contact .info-item {
   background-color: var(--surface-color);
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
   padding: 30px;
+  border-radius: 10px;
+  height: 100%;
+}
+
+.contact .contact-map {
+  background-color: var(--surface-color);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  padding: 10px;
+  border-radius: 10px;
+  height: 100%;
 }
 
 @media (max-width: 575px) {
@@ -1071,6 +1179,8 @@ section,
   border-radius: 50px;
   transition: all 0.3s ease-in-out;
   margin-right: 15px;
+  flex-shrink: 0;
+  /* Updated to prevent shrinking */
 }
 
 .contact .info-item h3 {
@@ -1093,9 +1203,13 @@ section,
 
 .contact .php-email-form {
   background-color: var(--surface-color);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border: var(--glass-border);
   height: 100%;
   padding: 30px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--glass-shadow);
+  border-radius: 10px;
 }
 
 @media (max-width: 575px) {
