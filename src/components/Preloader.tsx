@@ -23,7 +23,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
 
   useEffect(() => {
     // 1. Tick progress from 0 to 100
-    const progressDuration = 1800; // 1.8 seconds
+    const progressDuration = 2200; // 2.2 seconds
     const intervalTime = 30;
     const steps = progressDuration / intervalTime;
     let currentStep = 0;
@@ -62,7 +62,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
         duration: 0.8,
         ease: "power4.inOut",
       });
-    }, progressDuration + 400);
+    }, progressDuration + 600);
 
     // Lock body scroll during preloading
     document.body.style.overflow = "hidden";
@@ -74,6 +74,24 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
       document.body.style.overflow = "";
     };
   }, [onComplete]);
+
+  // Calculate ASCII progress bar
+  const getAsciiBar = () => {
+    const barsCount = Math.floor(progress / 10);
+    const hashes = "█".repeat(barsCount);
+    const dots = "░".repeat(10 - barsCount);
+    
+    let label = "Loading Kernel...";
+    if (progress >= 30 && progress < 50) label = "Mounting /dev/portfolio...";
+    if (progress >= 50 && progress < 70) label = "Establishing Database pools...";
+    if (progress >= 70 && progress < 90) label = "Optimizing Query Cache...";
+    if (progress >= 90 && progress < 100) label = "Broadcasting Reverb WebSockets...";
+    if (progress === 100) label = "✅ System Ready! Welcome, Commander.";
+
+    return { bar: `[${hashes}${dots}]`, label };
+  };
+
+  const ascii = getAsciiBar();
 
   return (
     <div className="preloader-panel fixed inset-0 z-[99999] flex flex-col justify-between bg-[#050508] p-8 font-mono text-[11px] text-neon-cyan sm:text-xs">
@@ -87,31 +105,24 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
       {/* Code Stream Logs */}
       <div className="flex-1 my-8 space-y-2 overflow-y-auto max-w-3xl leading-relaxed">
         {currentLogs.map((log, idx) => (
-          <div key={idx} className="flex gap-3">
+          <div key={idx} className="flex gap-3 animate-fade-in">
             <span className="text-neon-violet">[{idx + 1}]</span>
             <span className="text-fg-muted font-light">&gt; {log}</span>
             {idx < LOGS.length - 1 && <span className="text-green-500 font-bold">✓</span>}
           </div>
         ))}
-        {progress < 100 && (
-          <div className="animate-pulse text-neon-cyan">
-            &gt; Syncing environment assets... <span className="inline-block h-3.5 w-1.5 bg-neon-cyan animate-pulse" />
-          </div>
-        )}
       </div>
 
-      {/* Bottom Progress Panel */}
-      <div className="border-t border-neon-cyan/20 pt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="w-full sm:max-w-md bg-border rounded-full h-1 overflow-hidden">
-          <div
-            className="bg-neon-cyan h-full transition-all duration-75 shadow-[0_0_10px_var(--neon-cyan)]"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-        <div className="flex items-center gap-6 shrink-0 justify-between">
-          <span className="font-bold text-lg">{progress}%</span>
+      {/* Bottom Progress Panel with ASCII loading bar */}
+      <div className="border-t border-neon-cyan/20 pt-6 flex flex-col gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div className="flex items-center gap-3 font-mono text-xs sm:text-sm text-neon-cyan tracking-wider">
+            <span className="text-neon-violet font-bold">{progress}%</span>
+            <span>{ascii.bar}</span>
+            <span className="text-fg font-semibold animate-pulse">{ascii.label}</span>
+          </div>
           <span className="text-neon-violet tracking-widest text-[9px] uppercase animate-pulse">
-            [ LOADING ENGINE ]
+            [ SECURE SYSTEM INITIALIZATION ]
           </span>
         </div>
       </div>

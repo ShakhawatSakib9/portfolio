@@ -53,30 +53,89 @@ export default function GlitchOverlay() {
         )}
 
         {step === 2 && (
-          <div className="space-y-4">
+          <div className="space-y-4 animate-fade-in">
             <div className="flex items-center gap-3">
               <Loader2 className="h-5 w-5 animate-spin text-neon-cyan" />
-              <span className="text-xs text-neon-cyan font-bold">KUBERNETES ORCHESTRATOR</span>
+              <span className="text-xs text-neon-cyan font-bold uppercase tracking-wider">
+                KUBERNETES AUTOSCALER [ SIMULATED OBSERVABILITY ]
+              </span>
             </div>
-            <div className="text-[10px] text-fg-muted space-y-1 text-left bg-bg p-4 rounded-xl border border-border">
-              <p className="text-yellow-400">Warning: Pod cpu_utilization exceeded threshold (180%)</p>
-              <p className="text-neon-cyan">&gt; kubectl autoscale deployment msh-core --cpu-percent=80 --min=2 --max=10</p>
-              <p className="text-green-400">&gt; Spawning 3 new replica pods on cluster Node-F...</p>
-              <p>&gt; backup-pod-node-c98 [STATUS: RUNNING]</p>
-              <p>&gt; Re-routing load balancer traffic flows...</p>
+            
+            <div className="text-[10px] text-fg-muted space-y-3 text-left bg-bg p-4 rounded-xl border border-border">
+              <div>
+                <p className="text-yellow-400 font-bold mb-1">Warning: Pod cpu_utilization exceeded threshold (180%)</p>
+                <p className="text-neon-cyan">&gt; Scaling: msh-core --min=2 --max=10</p>
+              </div>
+
+              {/* Traffic & Queue Metrics */}
+              <div className="grid grid-cols-2 gap-4 border-t border-b border-border/40 py-2 my-1">
+                <div>
+                  <span className="text-fg-dim block text-[9px] uppercase">TRAFFIC RATE (SPIKE)</span>
+                  <span className="text-red-400 font-bold text-xs">15.2k req/sec</span>
+                  <div className="h-1.5 w-full bg-border rounded overflow-hidden mt-1">
+                    <div className="h-full bg-red-500 w-[95%] animate-pulse" />
+                  </div>
+                </div>
+                <div>
+                  <span className="text-fg-dim block text-[9px] uppercase">QUEUE DEPTH</span>
+                  <span className="text-yellow-400 font-bold text-xs">1,840 pending</span>
+                  <div className="h-1.5 w-full bg-border rounded overflow-hidden mt-1">
+                    <div className="h-full bg-yellow-500 w-[75%] animate-pulse" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Replica Scaling progress */}
+              <div className="space-y-1">
+                <div className="flex justify-between text-[9px] text-fg-dim">
+                  <span>POD REPLICAS</span>
+                  <span className="text-neon-cyan font-mono">8 / 10 ONLINE</span>
+                </div>
+                <div className="h-2 w-full bg-border rounded overflow-hidden">
+                  <div className="h-full bg-neon-cyan w-[80%] transition-all duration-1000" />
+                </div>
+              </div>
+
+              {/* Latency Normalization Graph */}
+              <div className="space-y-1">
+                <span className="text-fg-dim block text-[9px] uppercase">LATENCY TIMELINE</span>
+                <div className="flex items-end justify-between h-12 bg-black/60 rounded p-1 border border-border/20 font-mono text-[8px] text-fg-dim gap-1">
+                  <div className="flex-1 flex flex-col items-center justify-end h-full">
+                    <div className="w-full bg-emerald-500 h-[10%]" />
+                    <span className="mt-1">45ms</span>
+                  </div>
+                  <div className="flex-1 flex flex-col items-center justify-end h-full">
+                    <div className="w-full bg-red-500 h-[95%] animate-pulse" />
+                    <span className="mt-1">1850ms</span>
+                  </div>
+                  <div className="flex-1 flex flex-col items-center justify-end h-full animate-pulse">
+                    <div className="w-full bg-yellow-500 h-[45%]" />
+                    <span className="mt-1">620ms</span>
+                  </div>
+                  <div className="flex-1 flex flex-col items-center justify-end h-full">
+                    <div className="w-full bg-emerald-500 h-[12%]" />
+                    <span className="mt-1">52ms</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )}
 
         {step === 3 && (
-          <div className="space-y-4 text-center">
-            <ShieldCheck className="h-14 w-14 text-emerald-400 mx-auto" />
-            <h2 className="text-xl font-bold text-emerald-400 uppercase tracking-wide">
-              System Stable
-            </h2>
-            <p className="text-xs text-fg-dim">
-              Auto-scaling completed. Traffic successfully balanced.
-            </p>
+          <div className="space-y-5 text-center animate-fade-in">
+            <ShieldCheck className="h-14 w-14 text-emerald-400 mx-auto animate-bounce" />
+            <div className="space-y-1">
+              <h2 className="text-xl font-bold text-emerald-400 uppercase tracking-wide">
+                SYSTEM NOMINAL &amp; RECOVERED
+              </h2>
+              <span className="text-[9px] text-fg-dim block">[ SIMULATED TELEMETRY STATUS: RESOLVED ]</span>
+            </div>
+            <div className="text-[10px] text-fg-muted font-mono bg-bg border border-border p-4 rounded-xl text-left space-y-1">
+              <p>&gt; Replicas scaled back to 3/10.</p>
+              <p>&gt; Latency stabilized at 45ms. Drop rate: 0.00%</p>
+              <p>&gt; Rate-limiting cooldown complete.</p>
+            </div>
           </div>
         )}
       </div>

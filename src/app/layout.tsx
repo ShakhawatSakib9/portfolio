@@ -5,6 +5,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import CommandPalette from "@/components/CommandPalette";
 import PerformanceWidget from "@/components/PerformanceWidget";
+import InterfacePreferences from "@/components/InterfacePreferences";
 import { ModeProvider } from "@/context/ModeContext";
 import ThemeWrapper from "@/components/ThemeWrapper";
 
@@ -47,6 +48,7 @@ export default function RootLayout({
             <CustomCursor />
             <CommandPalette />
             <PerformanceWidget />
+            <InterfacePreferences />
             <SmoothScroll>{children}</SmoothScroll>
           </ThemeWrapper>
         </ModeProvider>

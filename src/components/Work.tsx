@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Zap, Cpu, ShieldCheck, Database, Lock, Eye, ArrowRight, HelpCircle } from "lucide-react";
 import { useMode } from "@/context/ModeContext";
 import { playClick, playTick } from "@/utils/audio";
+import TraceSimulator from "@/components/TraceSimulator";
 
 interface ArchitectureNode {
   name: string;
@@ -22,8 +23,12 @@ interface PerformanceMetric {
 
 interface Decision {
   title: string;
-  rationale: string;
+  date: string;
+  context: string;
+  rejectedOptions: string;
+  chosenSolution: string;
   tradeoff: string;
+  result: string;
 }
 
 interface Project {
@@ -71,8 +76,24 @@ const PROJECTS: Project[] = [
       { metric: "Duplicate reversal state", before: "High risk on simultaneous clicks", after: "ACID soft-delete validation locks", status: "Risk Eliminated" }
     ],
     decisionLog: [
-      { title: "Soft Delete vs Hard Delete", rationale: "We enforced valid = 0 database soft-delete rules in SubContractorContractPriceController.php to maintain strict accounting audit logs for all prior contractor price negotiations.", tradeoff: "Requires adding valid filtering to all retrieval queries." },
-      { title: "Laravel Policies for Approval Reversals", rationale: "Implemented Laravel Policies checking corporate role hierarchies rather than simple middleware routes, ensuring granular controller-level action locks.", tradeoff: "Marginally higher bootstrap code size." }
+      {
+        title: "Soft Delete vs Hard Delete",
+        date: "2026-06-27",
+        context: "Subcontractor negotiations require highly auditable tracking history.",
+        rejectedOptions: "Enforcing hard-delete database cascades.",
+        chosenSolution: "Enforcing custom valid = 0 soft-delete flags on contractor price entries.",
+        tradeoff: "Required adding filter logic to SubContractorContractPriceController.php queries.",
+        result: "100% prior pricing logs preserved safely for corporate audit trails."
+      },
+      {
+        title: "Laravel Policies for Approval Reversals",
+        date: "2026-06-29",
+        context: "Authorization access for comparative statements.",
+        rejectedOptions: "Applying simple URL parameters route validation middlewares.",
+        chosenSolution: "Granular Laravel Policy checking corporate role credentials.",
+        tradeoff: "Slightly higher bootstrap execution footprint.",
+        result: "Granular authorization checking directly inside controllers."
+      }
     ]
   },
   {
@@ -104,8 +125,24 @@ const PROJECTS: Project[] = [
       { metric: "Idempotent Webhook checks", before: "High risk of duplicate course enrollment", after: "Redis signature locks", status: "Zero Duplicate Purchases" }
     ],
     decisionLog: [
-      { title: "Tokenized Checkout Agreements", rationale: "We selected bKash Tokenized Payments v1.2 over legacy standard checkout to store token agreements, allowing 1-click renewals and automated student refund requests.", tradeoff: "Requires secure encryption of stored token keys." },
-      { title: "Webhook Idempotency Keys", rationale: "We stored Webhook transaction IDs in Redis memory cache to prevent duplicate events firing twice when webhook logs are re-delivered by bKash servers.", tradeoff: "Requires setting up Redis dependency." }
+      {
+        title: "Tokenized Checkout Agreements",
+        date: "2026-06-21",
+        context: "Course purchase subscription checkout renewals.",
+        rejectedOptions: "Using legacy basic URL redirected checkout API.",
+        chosenSolution: "bKash Tokenized Payments v1.2 storing agreement tokens.",
+        tradeoff: "Requires secure symmetric database key encryption.",
+        result: "1-click future course renewals and automated student refund requests."
+      },
+      {
+        title: "Webhook Idempotency Keys",
+        date: "2026-06-22",
+        context: "Protecting course enrollment ledger from duplicate API calls.",
+        rejectedOptions: "Simple SQL database constraints checks.",
+        chosenSolution: "Storing webhook transaction keys in Redis memory cache.",
+        tradeoff: "Increases external infrastructure dependency.",
+        result: "Guaranteed single course delivery per purchase."
+      }
     ]
   },
   {
@@ -135,8 +172,15 @@ const PROJECTS: Project[] = [
       { metric: "Privilege Escalation Risk", before: "High on raw query overrides", after: "Zero logic leak with route gates", status: "Secure Access Guaranteed" }
     ],
     decisionLog: [
-      { title: "Custom Middleware vs Laravel Spatie", rationale: "We engineered custom light-weight RBAC middleware in Innolearn's classroom engine rather than introducing heavy third-party Spatie packages to preserve maximum boot speed.", tradeoff: "Requires manual coding of new roles." },
-      { title: "Cache-backed permission trees", rationale: "Permissions are structured inside memory-backed arrays rather than pulling DB relational tables on every individual controller action.", tradeoff: "Requires manual cache clearance on role updates." }
+      {
+        title: "Custom Middleware vs Laravel Spatie",
+        date: "2026-06-14",
+        context: "Virtual classroom auth gate scaling speed.",
+        rejectedOptions: "Installing robust third-party Spatie Laravel permissions library.",
+        chosenSolution: "Handcrafting light weight dynamic RBAC PHP array checker.",
+        tradeoff: "Requires manual coding for onboarding future roles.",
+        result: "Extremely fast gate check times under 1ms."
+      }
     ]
   },
   {
@@ -159,15 +203,22 @@ const PROJECTS: Project[] = [
     architectureMap: [
       { name: "Order Checkout", responsibility: "Submits meal purchase transaction", techUsed: "POS Frontend / jQuery", fallback: "Block checkout panel UI", latency: "<30ms" },
       { name: "ACID Transaction", responsibility: "Executes safe inventory reduction block", techUsed: "Laravel DB::transaction", fallback: "Rollback and alert cashier", latency: "55ms" },
-      { name: "Recipe Deduplicator", responsibility: "Deducts stock of base patty, cheese, buns from inventory", techUsed: "MySQL pessimistic write locks", fallback: "Mark order as out of stock", latency: "25ms" }
+      { name: "Recipe Deduplicator", responsibility: "Deducts stock of base patty, cheese, buns from inventory", techUsed: "MySQL pessimistic write locks", fallback: "Mark order as out of stock", latency: "255ms" }
     ],
     beforeAfter: [
       { metric: "Concurrent race checks", before: "Frequent duplicate sales anomalies", after: "0% occurrence rate", status: "Error Eliminated" },
       { metric: "Checkout processing speed", before: "2.8 seconds under load", after: "740ms average response", status: "73% Speedup" }
     ],
     decisionLog: [
-      { title: "Pessimistic Locks on Ingredient Tables", rationale: "Used MySQL 'lockForUpdate()' during order checkouts to block other database threads from reading stale ingredient counts concurrently.", tradeoff: "Slight queue wait times during mass POS loads." },
-      { title: "Real-time recipe deduplication", rationale: "Ingredients are deducted directly on checkout rather than batch processing at midnight, ensuring cashiers never sell out-of-stock items.", tradeoff: "Higher database hit count per order." }
+      {
+        title: "Pessimistic Locks on Ingredient Tables",
+        date: "2026-06-22",
+        context: "Securing item count integrity during concurrent cashier checkouts.",
+        rejectedOptions: "Standard Eloquent model count updating.",
+        chosenSolution: "Adding lockForUpdate() constraints on MySQL order queries.",
+        tradeoff: "Slight queuing delays during peak order bursts.",
+        result: "Zero instances of negative inventory counts."
+      }
     ]
   }
 ];
@@ -373,6 +424,14 @@ export default function Work() {
                     )}
                   </div>
 
+                  {/* 1.1 Trace a Request Observability */}
+                  <div>
+                    <span className="font-mono text-[11px] uppercase text-neon-violet tracking-wider block mb-3">
+                      // 1.1 Live Distributed Request Tracer
+                    </span>
+                    <TraceSimulator />
+                  </div>
+
                   {/* Before vs After Performance observatory */}
                   <div>
                     <span className="font-mono text-[11px] uppercase text-neon-cyan tracking-wider block mb-3">
@@ -409,18 +468,38 @@ export default function Work() {
                     </span>
                     <div className="space-y-4">
                       {activeProject.decisionLog.map((dec) => (
-                        <div key={dec.title} className="p-4 rounded-xl border border-border/60 bg-bg/30">
-                          <h4 className="font-mono text-xs font-bold text-fg flex items-center gap-1.5">
-                            <span className="h-1.5 w-1.5 rounded-full bg-neon-violet" />
-                            {dec.title}
-                          </h4>
-                          <p className="mt-2 text-xs text-fg-muted leading-relaxed font-mono pl-3">
-                            {dec.rationale}
-                          </p>
-                          <p className="mt-1.5 text-[10px] text-fg-dim font-mono pl-3 italic">
-                            <span className="text-neon-cyan font-bold not-italic">[Trade-off]: </span>
-                            {dec.tradeoff}
-                          </p>
+                        <div key={dec.title} className="p-5 rounded-xl border border-border/80 bg-bg/30 font-mono space-y-2">
+                          <div className="flex items-center justify-between gap-4">
+                            <h4 className="text-xs font-bold text-fg flex items-center gap-1.5">
+                              <span className="h-1.5 w-1.5 rounded-full bg-neon-violet" />
+                              {dec.title}
+                            </h4>
+                            <span className="text-[9px] text-neon-cyan border border-neon-cyan/20 px-2 py-0.5 rounded">
+                              {dec.date}
+                            </span>
+                          </div>
+                          <div className="text-[10px] text-fg-muted space-y-1.5 pl-3 border-l border-border/60">
+                            <p>
+                              <span className="text-fg-dim font-bold uppercase">[Context]: </span>
+                              {dec.context}
+                            </p>
+                            <p>
+                              <span className="text-red-400 font-bold uppercase">[Rejected]: </span>
+                              {dec.rejectedOptions}
+                            </p>
+                            <p>
+                              <span className="text-emerald-400 font-bold uppercase">[Chosen]: </span>
+                              {dec.chosenSolution}
+                            </p>
+                            <p>
+                              <span className="text-yellow-400 font-bold uppercase">[Trade-off]: </span>
+                              {dec.tradeoff}
+                            </p>
+                            <p className="text-neon-cyan font-semibold">
+                              <span className="text-fg-dim font-bold uppercase">[Result]: </span>
+                              {dec.result}
+                            </p>
+                          </div>
                         </div>
                       ))}
                     </div>

@@ -12,6 +12,8 @@ interface ModeContextType {
   setHackerMode: (active: boolean) => void;
   isGlitchActive: boolean;
   triggerGlitch: () => void;
+  isFocusMode: boolean;
+  setIsFocusMode: (active: boolean) => void;
 }
 
 const ModeContext = createContext<ModeContextType | undefined>(undefined);
@@ -20,6 +22,7 @@ export function ModeProvider({ children }: { children: React.ReactNode }) {
   const [mode, setModeState] = useState<Mode>("recruiter");
   const [isHackerMode, setHackerMode] = useState(false);
   const [isGlitchActive, setGlitchActive] = useState(false);
+  const [isFocusMode, setIsFocusMode] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -84,6 +87,8 @@ export function ModeProvider({ children }: { children: React.ReactNode }) {
         setHackerMode,
         isGlitchActive,
         triggerGlitch,
+        isFocusMode,
+        setIsFocusMode,
       }}
     >
       {children}

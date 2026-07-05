@@ -4,11 +4,11 @@ import { useEffect, useRef } from "react";
 import { useMode } from "@/context/ModeContext";
 
 export default function MatrixRain() {
-  const { isHackerMode } = useMode();
+  const { isHackerMode, isFocusMode } = useMode();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    if (!isHackerMode) return;
+    if (!isHackerMode || isFocusMode) return;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -76,7 +76,7 @@ export default function MatrixRain() {
     };
   }, [isHackerMode]);
 
-  if (!isHackerMode) return null;
+  if (!isHackerMode || isFocusMode) return null;
 
   return (
     <canvas
