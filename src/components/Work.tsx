@@ -5,6 +5,7 @@ import { Zap, Cpu, ShieldCheck, Database, Lock, Eye, ArrowRight, HelpCircle } fr
 import { useMode } from "@/context/ModeContext";
 import { playClick, playTick } from "@/utils/audio";
 import TraceSimulator from "@/components/TraceSimulator";
+import ArchitectureMatrix from "@/components/ArchitectureMatrix";
 
 interface ArchitectureNode {
   name: string;
@@ -459,6 +460,11 @@ export default function Work() {
                         </tbody>
                       </table>
                     </div>
+                  </div>
+
+                  {/* 2.1 Interactive Architecture Decision Matrix */}
+                  <div>
+                    <ArchitectureMatrix />
                   </div>
 
                   {/* Decision Logs */}
