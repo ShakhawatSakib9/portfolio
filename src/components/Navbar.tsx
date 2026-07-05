@@ -1,0 +1,150 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { Menu, X, ArrowRight } from "lucide-react";
+import Magnetic from "./Magnetic";
+
+const NAV_ITEMS = [
+  { label: "Home", href: "#hero" },
+  { label: "About", href: "#about" },
+  { label: "Skills", href: "#skills" },
+  { label: "Work", href: "#work" },
+  { label: "Contact", href: "#contact" },
+];
+
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+
+      // Simple active section detection
+      const sections = ["hero", "about", "skills", "work", "contact"];
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 120 && rect.bottom >= 120) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <header
+      className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
+        scrolled ? "py-4" : "py-6"
+      }`}
+    >
+      <div className="mx-auto max-w-7xl px-6 lg:px-12">
+        <div
+          className={`flex items-center justify-between px-6 py-3 rounded-full transition-all duration-300 ${
+            scrolled
+              ? "glass border-border-glow shadow-[0_4px_30px_rgba(0,0,0,0.4)]"
+              : "bg-transparent border-transparent"
+          } border`}
+        >
+          {/* Logo */}
+          <a href="#hero" className="flex items-center gap-2 group">
+            <span className="font-mono text-lg font-bold tracking-wider text-gradient group-hover:text-glow">
+              &lt;MSH /&gt;
+            </span>
+          </a>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-8">
+            {NAV_ITEMS.map((item) => {
+              const id = item.href.replace("#", "");
+              const isActive = activeSection === id;
+              return (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className={`relative font-mono text-xs uppercase tracking-widest transition-colors hover:text-neon-cyan ${
+                    isActive ? "text-neon-cyan" : "text-fg-muted"
+                  }`}
+                >
+                  {item.label}
+                  {isActive && (
+                    <span className="absolute -bottom-1.5 left-0 h-[2px] w-full bg-gradient-to-r from-neon-cyan to-neon-violet shadow-[0_0_8px_var(--neon-cyan)]" />
+                  )}
+                </a>
+              );
+            })}
+          </nav>
+
+          {/* Call to Action Button */}
+          <div className="hidden md:block">
+            <Magnetic strength={0.3}>
+              <a
+                href="#contact"
+                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-border px-5 py-2 font-mono text-xs uppercase tracking-widest text-fg transition-colors hover:border-neon-cyan hover:text-black"
+              >
+                {/* Hover slide background */}
+                <span className="absolute inset-0 z-0 translate-y-full bg-neon-cyan transition-transform duration-300 ease-out group-hover:translate-y-0" />
+                <span className="relative z-10 flex items-center gap-1.5">
+                  Let&apos;s talk
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                </span>
+              </a>
+            </Magnetic>
+          </div>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-fg-muted md:hidden hover:text-neon-cyan"
+            aria-label="Toggle Menu"
+          >
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Glass Menu */}
+      <div
+        className={`fixed inset-x-0 top-[88px] mx-6 z-40 rounded-3xl border border-border-glow glass p-8 shadow-[0_10px_40px_rgba(0,0,0,0.6)] transition-all duration-300 md:hidden ${
+          mobileOpen
+            ? "translate-y-0 opacity-100 pointer-events-auto"
+            : "-translate-y-10 opacity-0 pointer-events-none"
+        }`}
+      >
+        <nav className="flex flex-col gap-6">
+          {NAV_ITEMS.map((item) => {
+            const id = item.href.replace("#", "");
+            const isActive = activeSection === id;
+            return (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className={`font-mono text-sm uppercase tracking-widest transition-colors hover:text-neon-cyan ${
+                  isActive ? "text-neon-cyan" : "text-fg-muted"
+                }`}
+              >
+                &gt; {item.label}
+              </a>
+            );
+          })}
+          <a
+            href="#contact"
+            onClick={() => setMobileOpen(false)}
+            className="mt-4 flex items-center justify-center gap-2 rounded-xl bg-neon-cyan py-3 text-center font-mono text-sm uppercase tracking-widest text-black"
+          >
+            Let&apos;s Talk
+            <ArrowRight className="h-4 w-4" />
+          </a>
+        </nav>
+      </div>
+    </header>
+  );
+}
