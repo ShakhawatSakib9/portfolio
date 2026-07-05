@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight, Briefcase, Terminal as TerminalIcon } from "lucide-react";
 import Magnetic from "./Magnetic";
+import { useMode } from "@/context/ModeContext";
+import { playChime } from "@/utils/audio";
 
 const NAV_ITEMS = [
   { label: "Home", href: "#hero" },
@@ -16,6 +18,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
+  const { mode, toggleMode } = useMode();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,6 +42,11 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleToggle = () => {
+    playChime();
+    toggleMode();
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
@@ -59,6 +67,40 @@ export default function Navbar() {
               &lt;MSH /&gt;
             </span>
           </a>
+
+          {/* Mode Toggle Capsule */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={handleToggle}
+              data-cursor-label={mode === "recruiter" ? "[ DEV MODE ]" : "[ RECRUITER MODE ]"}
+              className="relative flex items-center justify-between gap-1 p-1 rounded-full bg-bg border border-border cursor-pointer select-none w-[165px] h-[36px] overflow-hidden"
+            >
+              {/* Slider highlight */}
+              <span
+                className={`absolute top-1 bottom-1 w-[78px] rounded-full transition-all duration-300 ${
+                  mode === "engineer"
+                    ? "left-[82px] bg-neon-violet/10 border border-neon-violet/30 shadow-[0_0_12px_rgba(139,92,246,0.2)]"
+                    : "left-1 bg-neon-cyan/10 border border-neon-cyan/30 shadow-[0_0_12px_rgba(0,255,242,0.2)]"
+                }`}
+              />
+
+              {/* Recruiter button option */}
+              <span className={`relative z-10 w-[78px] text-center font-mono text-[9px] font-bold tracking-wider flex items-center justify-center gap-1 transition-colors ${
+                mode === "recruiter" ? "text-neon-cyan" : "text-fg-dim"
+              }`}>
+                <Briefcase className="h-2.5 w-2.5" />
+                HR Mode
+              </span>
+
+              {/* Dev button option */}
+              <span className={`relative z-10 w-[78px] text-center font-mono text-[9px] font-bold tracking-wider flex items-center justify-center gap-1 transition-colors ${
+                mode === "engineer" ? "text-neon-violet" : "text-fg-dim"
+              }`}>
+                <TerminalIcon className="h-2.5 w-2.5" />
+                Dev Mode
+              </span>
+            </button>
+          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">

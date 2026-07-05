@@ -11,8 +11,11 @@ import Marquee from "@/components/Marquee";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Work from "@/components/Work";
+import IncidentSimulator from "@/components/IncidentSimulator";
 import ApiPlayground from "@/components/ApiPlayground";
 import Contact from "@/components/Contact";
+import BkashModal from "@/components/BkashModal";
+import { useMode } from "@/context/ModeContext";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -20,6 +23,8 @@ if (typeof window !== "undefined") {
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
+  const [bkashOpen, setBkashOpen] = useState(false);
+  const { mode } = useMode();
 
   useEffect(() => {
     if (loading) return;
@@ -51,14 +56,17 @@ export default function Home() {
       {loading && <Preloader onComplete={() => setLoading(false)} />}
       <Navbar />
       <main className="relative">
-        <Hero />
+        <Hero onUnlockResume={() => setBkashOpen(true)} />
         <Marquee />
         <About />
         <Skills />
         <Work />
+        {mode === "engineer" && <IncidentSimulator />}
         <ApiPlayground />
         <Contact />
       </main>
+
+      <BkashModal isOpen={bkashOpen} onClose={() => setBkashOpen(false)} />
     </>
   );
 }

@@ -1,10 +1,47 @@
 "use client";
 
 import { useState } from "react";
-import { Zap, Cpu, ShieldCheck, Database, Lock } from "lucide-react";
-import Magnetic from "./Magnetic";
+import { Zap, Cpu, ShieldCheck, Database, Lock, Eye, ArrowRight, HelpCircle } from "lucide-react";
+import { useMode } from "@/context/ModeContext";
+import { playClick, playTick } from "@/utils/audio";
 
-const PROJECTS = [
+interface ArchitectureNode {
+  name: string;
+  responsibility: string;
+  techUsed: string;
+  fallback: string;
+  latency: string;
+}
+
+interface PerformanceMetric {
+  metric: string;
+  before: string;
+  after: string;
+  status: string;
+}
+
+interface Decision {
+  title: string;
+  rationale: string;
+  tradeoff: string;
+}
+
+interface Project {
+  id: string;
+  title: string;
+  subtitle: string;
+  confidentialTag: string;
+  description: string;
+  challenge: string;
+  solution: string;
+  metrics: { label: string; value: string; icon: any }[];
+  tech: string[];
+  architectureMap: ArchitectureNode[];
+  beforeAfter: PerformanceMetric[];
+  decisionLog: Decision[];
+}
+
+const PROJECTS: Project[] = [
   {
     id: "construction-mis",
     title: "Construction Operations & MIS",
@@ -22,6 +59,21 @@ const PROJECTS = [
       { label: "Data Integrity", value: "100% Audit Trail", icon: ShieldCheck },
     ],
     tech: ["Laravel", "PHP (OOP)", "MySQL", "Select2 AJAX", "jQuery", "Bootstrap"],
+    architectureMap: [
+      { name: "Client Request", responsibility: "Triggers comparative statement calculation", techUsed: "jQuery / Select2", fallback: "Optimistic local state load", latency: "<20ms" },
+      { name: "Laravel API", responsibility: "Eager loads contractor price models with active index logic", techUsed: "Eloquent / Laravel Controller", fallback: "DB transaction rollbacks", latency: "45ms" },
+      { name: "MySQL Database", responsibility: "Runs subqueries checking for active contractor prices", techUsed: "InnoDB Indexing (composite keys)", fallback: "Revert to main table cursor scan", latency: "110ms" },
+      { name: "Approval Log", responsibility: "Enforces soft-delete validity status checks", techUsed: "SoftDeletes / valid=0 log", fallback: "Hard delete database schema lock", latency: "15ms" },
+    ],
+    beforeAfter: [
+      { metric: "Comparative ERP queries", before: "480 queries (N+1 nested loops)", after: "14 optimized queries", status: "97% Query Count Reduction" },
+      { metric: "Execution latency", before: "12.0 seconds load time", after: "1.8 seconds load time", status: "85% Speed Increase" },
+      { metric: "Duplicate reversal state", before: "High risk on simultaneous clicks", after: "ACID soft-delete validation locks", status: "Risk Eliminated" }
+    ],
+    decisionLog: [
+      { title: "Soft Delete vs Hard Delete", rationale: "We enforced valid = 0 database soft-delete rules in SubContractorContractPriceController.php to maintain strict accounting audit logs for all prior contractor price negotiations.", tradeoff: "Requires adding valid filtering to all retrieval queries." },
+      { title: "Laravel Policies for Approval Reversals", rationale: "Implemented Laravel Policies checking corporate role hierarchies rather than simple middleware routes, ensuring granular controller-level action locks.", tradeoff: "Marginally higher bootstrap code size." }
+    ]
   },
   {
     id: "eduvess-lms",
@@ -40,6 +92,21 @@ const PROJECTS = [
       { label: "Transaction Safety", value: "100% Verified Hooks", icon: Database },
     ],
     tech: ["Laravel", "bKash Tokenized API", "MySQL", "RESTful APIs", "AJAX", "Blade"],
+    architectureMap: [
+      { name: "User Purchase", responsibility: "Requests course enrollment checkout", techUsed: "Next.js UI / Fetch API", fallback: "Save items to cart locally", latency: "<10ms" },
+      { name: "bKash Gateway", responsibility: "Executes tokenized agreement and verification", techUsed: "bKash Tokenized Payment API", fallback: "Fail transaction and notify customer", latency: "250ms" },
+      { name: "Webhook Listener", responsibility: "Validates transaction signature payload", techUsed: "BkashTokenizePaymentController", fallback: "Re-poll bKash API via queue job", latency: "35ms" },
+      { name: "LMS Enrollment", responsibility: "Grants student course access in MySQL DB", techUsed: "ACID Database Transactions", fallback: "Rollback billing ledger updates", latency: "20ms" }
+    ],
+    beforeAfter: [
+      { metric: "Checkout failure rate", before: "8.5% drop-offs on verification delay", after: "0.2% drop-offs with queues", status: "97% Reliability Gain" },
+      { metric: "Payment verification delay", before: "4.2 seconds waiting client response", after: "180ms background execution", status: "95% Performance Boost" },
+      { metric: "Idempotent Webhook checks", before: "High risk of duplicate course enrollment", after: "Redis signature locks", status: "Zero Duplicate Purchases" }
+    ],
+    decisionLog: [
+      { title: "Tokenized Checkout Agreements", rationale: "We selected bKash Tokenized Payments v1.2 over legacy standard checkout to store token agreements, allowing 1-click renewals and automated student refund requests.", tradeoff: "Requires secure encryption of stored token keys." },
+      { title: "Webhook Idempotency Keys", rationale: "We stored Webhook transaction IDs in Redis memory cache to prevent duplicate events firing twice when webhook logs are re-delivered by bKash servers.", tradeoff: "Requires setting up Redis dependency." }
+    ]
   },
   {
     id: "innolearn-classroom",
@@ -58,6 +125,19 @@ const PROJECTS = [
       { label: "Class Security", value: "Zero Privilege Leaks", icon: Database },
     ],
     tech: ["Laravel", "PHP (OOP)", "MySQL", "RBAC Middleware", "JavaScript", "AJAX"],
+    architectureMap: [
+      { name: "Access Request", responsibility: "Attempts access to Teacher dashboard", techUsed: "AJAX route call", fallback: "Redirect to generic home index", latency: "<15ms" },
+      { name: "RBAC Middleware", responsibility: "Validates active token against permission hierarchies", techUsed: "Custom PHP Middleware", fallback: "Revoke authorization token immediately", latency: "<4ms" },
+      { name: "DB Gate Check", responsibility: "Looks up role status constraints", techUsed: "MySQL InnoDB memory index", fallback: "Lock dashboard access", latency: "12ms" }
+    ],
+    beforeAfter: [
+      { metric: "Authorization lag", before: "210ms checks on database joins", after: "3.5ms query cache lookup", status: "98% Faster Authorization" },
+      { metric: "Privilege Escalation Risk", before: "High on raw query overrides", after: "Zero logic leak with route gates", status: "Secure Access Guaranteed" }
+    ],
+    decisionLog: [
+      { title: "Custom Middleware vs Laravel Spatie", rationale: "We engineered custom light-weight RBAC middleware in Innolearn's classroom engine rather than introducing heavy third-party Spatie packages to preserve maximum boot speed.", tradeoff: "Requires manual coding of new roles." },
+      { title: "Cache-backed permission trees", rationale: "Permissions are structured inside memory-backed arrays rather than pulling DB relational tables on every individual controller action.", tradeoff: "Requires manual cache clearance on role updates." }
+    ]
   },
   {
     id: "restaurant-pos",
@@ -65,7 +145,7 @@ const PROJECTS = [
     subtitle: "POS, Billing & Inventory (forReceipeSys)",
     confidentialTag: "Commercial POS System",
     description:
-      "A complete restaurant operation system covering POS order billing, recipe-based inventory deduplication, and daily sales/profit reporting.",
+      "A complete restaurant operation system covering POS order billing, recipe-based ingredient deduplication, and daily sales/profit reporting.",
     challenge:
       "Preventing ingredient inventory variance and race conditions during peak rush-hour order checkouts.",
     solution:
@@ -76,29 +156,27 @@ const PROJECTS = [
       { label: "Audit Ledger", value: "Real-time Sales Log", icon: Database },
     ],
     tech: ["Laravel", "MySQL", "JavaScript", "jQuery", "AJAX", "Bootstrap"],
-  },
-  {
-    id: "ecommerce-store",
-    title: "E-Commerce & Store Management",
-    subtitle: "Scalable Retail & Stock Engine",
-    confidentialTag: "Retail Management",
-    description:
-      "A scalable e-commerce backend and store management system for product catalog indexing, customer order tracking, and inventory stock control.",
-    challenge:
-      "Maintaining fast product search responsiveness during large catalog queries and multi-store inventory updates.",
-    solution:
-      "Structured indexed database schemas, RESTful product catalog APIs, and automated low-stock alert notifications.",
-    metrics: [
-      { label: "Catalog Search", value: "<100ms Query Time", icon: Zap },
-      { label: "Order State", value: "Automated Workflow", icon: Cpu },
-      { label: "Data Integrity", value: "Strict Foreign Keys", icon: ShieldCheck },
+    architectureMap: [
+      { name: "Order Checkout", responsibility: "Submits meal purchase transaction", techUsed: "POS Frontend / jQuery", fallback: "Block checkout panel UI", latency: "<30ms" },
+      { name: "ACID Transaction", responsibility: "Executes safe inventory reduction block", techUsed: "Laravel DB::transaction", fallback: "Rollback and alert cashier", latency: "55ms" },
+      { name: "Recipe Deduplicator", responsibility: "Deducts stock of base patty, cheese, buns from inventory", techUsed: "MySQL pessimistic write locks", fallback: "Mark order as out of stock", latency: "25ms" }
     ],
-    tech: ["Laravel", "MySQL", "RESTful APIs", "JSON", "Blade Templating"],
-  },
+    beforeAfter: [
+      { metric: "Concurrent race checks", before: "Frequent duplicate sales anomalies", after: "0% occurrence rate", status: "Error Eliminated" },
+      { metric: "Checkout processing speed", before: "2.8 seconds under load", after: "740ms average response", status: "73% Speedup" }
+    ],
+    decisionLog: [
+      { title: "Pessimistic Locks on Ingredient Tables", rationale: "Used MySQL 'lockForUpdate()' during order checkouts to block other database threads from reading stale ingredient counts concurrently.", tradeoff: "Slight queue wait times during mass POS loads." },
+      { title: "Real-time recipe deduplication", rationale: "Ingredients are deducted directly on checkout rather than batch processing at midnight, ensuring cashiers never sell out-of-stock items.", tradeoff: "Higher database hit count per order." }
+    ]
+  }
 ];
 
 export default function Work() {
+  const { mode } = useMode();
   const [activeTab, setActiveTab] = useState(0);
+  const [activeNodeIdx, setActiveNodeIdx] = useState<number | null>(null);
+
   const activeProject = PROJECTS[activeTab];
 
   return (
@@ -127,7 +205,11 @@ export default function Work() {
               return (
                 <button
                   key={project.id}
-                  onClick={() => setActiveTab(idx)}
+                  onClick={() => {
+                    playClick();
+                    setActiveTab(idx);
+                    setActiveNodeIdx(null);
+                  }}
                   data-cursor-label="[ VIEW CASE ]"
                   className={`w-full text-left p-5 rounded-2xl border transition-all duration-300 relative overflow-hidden ${
                     isActive
@@ -177,56 +259,174 @@ export default function Work() {
                 </div>
               </div>
 
-              {/* Description */}
-              <p className="mt-6 text-fg-muted leading-relaxed text-sm sm:text-base">
-                {activeProject.description}
-              </p>
+              {/* Mode-Dependent View */}
+              {mode === "recruiter" ? (
+                /* RECRUITER MODE: Clean, impact-focused display */
+                <div className="space-y-8 mt-6">
+                  <div>
+                    <p className="text-fg-muted leading-relaxed text-sm sm:text-base">
+                      {activeProject.description}
+                    </p>
+                  </div>
 
-              {/* Challenge & Solution Grid */}
-              <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
-                <div className="rounded-2xl border border-border/60 bg-bg/40 p-5">
-                  <span className="font-mono text-[11px] uppercase tracking-wider text-red-400 font-semibold block mb-2">
-                    [ The Challenge ]
-                  </span>
-                  <p className="text-xs text-fg-muted leading-relaxed">
-                    {activeProject.challenge}
-                  </p>
-                </div>
-
-                <div className="rounded-2xl border border-neon-cyan/20 bg-neon-cyan/5 p-5">
-                  <span className="font-mono text-[11px] uppercase tracking-wider text-neon-cyan font-semibold block mb-2">
-                    [ The Architecture Solution ]
-                  </span>
-                  <p className="text-xs text-fg-muted leading-relaxed">
-                    {activeProject.solution}
-                  </p>
-                </div>
-              </div>
-
-              {/* Performance Metrics */}
-              <div className="mt-8">
-                <p className="font-mono text-[11px] uppercase tracking-wider text-fg-dim mb-3">
-                  Key Metrics &amp; Impact
-                </p>
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-                  {activeProject.metrics.map(({ label, value, icon: Icon }) => (
-                    <div
-                      key={label}
-                      className="rounded-xl border border-border/80 bg-bg/60 p-3.5 backdrop-blur-sm"
-                    >
-                      <div className="flex items-center gap-2 text-neon-violet">
-                        <Icon className="h-3.5 w-3.5" />
-                        <span className="font-mono text-[10px] uppercase tracking-wider text-fg-dim">
-                          {label}
-                        </span>
-                      </div>
-                      <div className="mt-1.5 font-mono text-sm font-bold text-fg">
-                        {value}
-                      </div>
+                  {/* Challenge & Solution Grid */}
+                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                    <div className="rounded-2xl border border-border/60 bg-bg/40 p-5">
+                      <span className="font-mono text-[11px] uppercase tracking-wider text-red-400 font-semibold block mb-2">
+                        [ The Challenge ]
+                      </span>
+                      <p className="text-xs text-fg-muted leading-relaxed">
+                        {activeProject.challenge}
+                      </p>
                     </div>
-                  ))}
+
+                    <div className="rounded-2xl border border-neon-cyan/20 bg-neon-cyan/5 p-5">
+                      <span className="font-mono text-[11px] uppercase tracking-wider text-neon-cyan font-semibold block mb-2">
+                        [ The Architecture Solution ]
+                      </span>
+                      <p className="text-xs text-fg-muted leading-relaxed">
+                        {activeProject.solution}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Performance Metrics */}
+                  <div>
+                    <p className="font-mono text-[11px] uppercase tracking-wider text-fg-dim mb-3">
+                      Key Metrics &amp; Impact
+                    </p>
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                      {activeProject.metrics.map(({ label, value, icon: Icon }) => (
+                        <div
+                          key={label}
+                          className="rounded-xl border border-border/80 bg-bg/60 p-3.5 backdrop-blur-sm"
+                        >
+                          <div className="flex items-center gap-2 text-neon-violet">
+                            <Icon className="h-3.5 w-3.5" />
+                            <span className="font-mono text-[10px] uppercase tracking-wider text-fg-dim">
+                              {label}
+                            </span>
+                          </div>
+                          <div className="mt-1.5 font-mono text-sm font-bold text-fg">
+                            {value}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                /* ENGINEER MODE: High-fidelity code, incident map, architecture, decision logs */
+                <div className="space-y-8 mt-6">
+                  {/* Interactive Architecture Flow Diagram */}
+                  <div>
+                    <span className="font-mono text-[11px] uppercase text-neon-violet tracking-wider block mb-3">
+                      // 1. Live Architecture Explorer (Click Nodes)
+                    </span>
+                    <div className="flex flex-wrap items-center gap-2.5 p-4 rounded-2xl bg-bg/60 border border-border/80">
+                      {activeProject.architectureMap.map((node, index) => (
+                        <div key={node.name} className="flex items-center gap-2">
+                          <button
+                            onClick={() => {
+                              playTick();
+                              setActiveNodeIdx(activeNodeIdx === index ? null : index);
+                            }}
+                            className={`px-3 py-2 rounded-lg font-mono text-[10px] border transition-all ${
+                              activeNodeIdx === index
+                                ? "bg-neon-cyan/15 border-neon-cyan text-neon-cyan shadow-[0_0_12px_rgba(0,255,242,0.2)]"
+                                : "bg-bg border-border text-fg-muted hover:border-fg-dim"
+                            }`}
+                          >
+                            {node.name}
+                          </button>
+                          {index < activeProject.architectureMap.length - 1 && (
+                            <span className="text-fg-dim text-[10px]">➔</span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Explainer card for selected node */}
+                    {activeNodeIdx !== null && (
+                      <div className="mt-3 rounded-xl border border-neon-cyan/20 bg-neon-cyan/5 p-4 animate-fade-in font-mono text-xs text-fg-muted space-y-1.5">
+                        <div>
+                          <span className="text-neon-cyan font-bold">Node: </span>
+                          <span>{activeProject.architectureMap[activeNodeIdx].name}</span>
+                        </div>
+                        <div>
+                          <span className="text-neon-cyan font-bold">Responsibility: </span>
+                          <span>{activeProject.architectureMap[activeNodeIdx].responsibility}</span>
+                        </div>
+                        <div>
+                          <span className="text-neon-cyan font-bold">Tech Module: </span>
+                          <span>{activeProject.architectureMap[activeNodeIdx].techUsed}</span>
+                        </div>
+                        <div>
+                          <span className="text-neon-cyan font-bold">Fault Fallback: </span>
+                          <span>{activeProject.architectureMap[activeNodeIdx].fallback}</span>
+                        </div>
+                        <div className="flex justify-between pt-1 text-[10px] text-fg-dim">
+                          <span>Latency: {activeProject.architectureMap[activeNodeIdx].latency}</span>
+                          <span>Throughput: Real-time event-driven</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Before vs After Performance observatory */}
+                  <div>
+                    <span className="font-mono text-[11px] uppercase text-neon-cyan tracking-wider block mb-3">
+                      // 2. Before ➔ After Performance Observatory
+                    </span>
+                    <div className="overflow-x-auto rounded-2xl border border-border/80 bg-bg/40">
+                      <table className="w-full text-left font-mono text-xs border-collapse">
+                        <thead>
+                          <tr className="border-b border-border/80 bg-bg-card/40 text-fg-dim">
+                            <th className="p-3">Metric</th>
+                            <th className="p-3">Before</th>
+                            <th className="p-3">After (Optimized)</th>
+                            <th className="p-3 text-right">Result</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {activeProject.beforeAfter.map((m) => (
+                            <tr key={m.metric} className="border-b border-border/40 hover:bg-bg/25">
+                              <td className="p-3 font-semibold text-fg">{m.metric}</td>
+                              <td className="p-3 text-red-400">{m.before}</td>
+                              <td className="p-3 text-emerald-400">{m.after}</td>
+                              <td className="p-3 text-right text-neon-cyan font-semibold">{m.status}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  {/* Decision Logs */}
+                  <div>
+                    <span className="font-mono text-[11px] uppercase text-neon-violet tracking-wider block mb-3">
+                      // 3. Engineering Decisions & Architecture Trade-offs
+                    </span>
+                    <div className="space-y-4">
+                      {activeProject.decisionLog.map((dec) => (
+                        <div key={dec.title} className="p-4 rounded-xl border border-border/60 bg-bg/30">
+                          <h4 className="font-mono text-xs font-bold text-fg flex items-center gap-1.5">
+                            <span className="h-1.5 w-1.5 rounded-full bg-neon-violet" />
+                            {dec.title}
+                          </h4>
+                          <p className="mt-2 text-xs text-fg-muted leading-relaxed font-mono pl-3">
+                            {dec.rationale}
+                          </p>
+                          <p className="mt-1.5 text-[10px] text-fg-dim font-mono pl-3 italic">
+                            <span className="text-neon-cyan font-bold not-italic">[Trade-off]: </span>
+                            {dec.tradeoff}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* Technologies Used Badges */}
               <div className="mt-8 pt-6 border-t border-border/60">

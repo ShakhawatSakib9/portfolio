@@ -43,6 +43,9 @@ function useTypingRole() {
   return text;
 }
 
+import { useMode } from "@/context/ModeContext";
+import { playClick } from "@/utils/audio";
+
 const socials = [
   { icon: Github, href: "https://github.com/ShakhawatSakib9", label: "GitHub" },
   { icon: Linkedin, href: "https://www.linkedin.com/in/md-shakhawat-hossain-0a8ba0352/", label: "LinkedIn" },
@@ -50,8 +53,21 @@ const socials = [
   { icon: Instagram, href: "https://www.instagram.com/shakhawat_sa_kib/?hl=en", label: "Instagram" },
 ];
 
-export default function Hero() {
+interface HeroProps {
+  onUnlockResume: () => void;
+}
+
+export default function Hero({ onUnlockResume }: HeroProps) {
   const role = useTypingRole();
+  const { mode } = useMode();
+
+  const handleResumeClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (mode === "engineer") {
+      e.preventDefault();
+      playClick();
+      onUnlockResume();
+    }
+  };
 
   return (
     <section
@@ -107,7 +123,8 @@ export default function Hero() {
             <Magnetic>
               <a
                 href="/resume/Md.-Shakhawat-Hossain-R-L.pdf"
-                target="_blank"
+                onClick={handleResumeClick}
+                data-cursor-label={mode === "engineer" ? "[ UNLOCK VIA BKASH ]" : "[ DOWNLOAD CV ]"}
                 className="inline-flex items-center gap-2 rounded-full border border-border-glow px-7 py-3 font-medium text-fg glow-hover"
               >
                 <Download className="h-4 w-4" />

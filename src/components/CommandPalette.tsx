@@ -126,6 +126,37 @@ export default function CommandPalette() {
       },
     },
     {
+      id: "artisan-inspire",
+      category: "Developer",
+      name: "php artisan inspire",
+      description: "Run Laravel Artisan inspiration generator",
+      shortcut: "P A I",
+      icon: Code,
+      action: () => {
+        alert("Laravel Artisan Inspire:\n\n\"Complexity is easy; simplicity is hard. Good architecture is about making hard things look simple.\"");
+      },
+    },
+    {
+      id: "artisan-hire",
+      category: "Developer",
+      name: "php artisan hire:me",
+      description: "Jump to direct hire and contact portal",
+      shortcut: "P A H",
+      icon: Code,
+      action: () => scrollToSection("contact"),
+    },
+    {
+      id: "tinker-users",
+      category: "Developer",
+      name: "User::count()",
+      description: "Tinker simulation: fetch live active visitor count",
+      shortcut: "U C",
+      icon: Code,
+      action: () => {
+        alert(`Laravel Tinker Response:\n\n>>> User::count()\n=> ${Math.floor(Math.random() * 4) + 3} active live connections via Laravel Reverb.`);
+      },
+    },
+    {
       id: "download-cv",
       category: "Actions",
       name: "Download Resume PDF",

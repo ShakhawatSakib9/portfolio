@@ -5,6 +5,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
 import CommandPalette from "@/components/CommandPalette";
 import PerformanceWidget from "@/components/PerformanceWidget";
+import { ModeProvider } from "@/context/ModeContext";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -40,10 +41,12 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} antialiased`}
     >
       <body className="bg-noise">
-        <CustomCursor />
-        <CommandPalette />
-        <PerformanceWidget />
-        <SmoothScroll>{children}</SmoothScroll>
+        <ModeProvider>
+          <CustomCursor />
+          <CommandPalette />
+          <PerformanceWidget />
+          <SmoothScroll>{children}</SmoothScroll>
+        </ModeProvider>
       </body>
     </html>
   );
