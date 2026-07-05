@@ -43,7 +43,7 @@ export default function Contact() {
               {/* Contact info card */}
               <div className="mt-8 space-y-4">
                 <a
-                  href="mailto:shakhawatsakib9@gmail.com"
+                  href="mailto:shakhawat.sakib9@gmail.com"
                   className="flex items-center gap-4 rounded-2xl border border-border bg-bg-card/40 p-4 hover:border-neon-cyan/40 transition-colors w-fit"
                 >
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-bg border border-border-glow text-neon-cyan">
@@ -54,10 +54,24 @@ export default function Contact() {
                       Direct Email
                     </span>
                     <span className="block text-sm font-semibold text-fg">
-                      shakhawatsakib9@gmail.com
+                      shakhawat.sakib9@gmail.com
                     </span>
                   </div>
                 </a>
+
+                <div className="flex items-center gap-4 rounded-2xl border border-border bg-bg-card/40 p-4 w-fit">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-bg border border-border-glow text-neon-violet">
+                    <span className="font-mono text-xs font-bold">BD</span>
+                  </div>
+                  <div>
+                    <span className="block font-mono text-[9px] uppercase tracking-wider text-fg-dim">
+                      Phone &amp; Location
+                    </span>
+                    <span className="block text-sm font-semibold text-fg">
+                      +880 1753-431206 | Mirpur-1, Dhaka
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
 

@@ -5,10 +5,10 @@ import Magnetic from "./Magnetic";
 import { Award, Code2, Cpu, Zap } from "lucide-react";
 
 const STATS = [
-  { icon: Award, value: "4+", label: "Years Experience" },
-  { icon: Code2, value: "25+", label: "Projects Completed" },
-  { icon: Zap, value: "85%", label: "Query Optimization" },
-  { icon: Cpu, value: "99.9%", label: "System Uptime" },
+  { icon: Award, value: "1+ Yr", label: "Industry Exp (IISL)" },
+  { icon: Code2, value: "5+", label: "Production Apps" },
+  { icon: Zap, value: "3.40", label: "B.Sc CSE CGPA (DIU)" },
+  { icon: Cpu, value: "100%", label: "Clean Code & Security" },
 ];
 
 export default function About() {
@@ -47,20 +47,20 @@ export default function About() {
           <div className="lg:col-span-7 reveal">
             <p className="font-mono text-xs uppercase tracking-[0.3em] text-neon-cyan">// 01. About Me</p>
             <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-fg">
-              Architecting solid <span className="text-gradient">backends</span>{" & "}elegant APIs
+              Software Developer at <span className="text-gradient">IISL</span> &amp; Laravel Engineer
             </h2>
             
             <div className="mt-6 space-y-4 text-fg-muted text-base leading-relaxed sm:text-lg">
               <p>
-                I am a dedicated Full-Stack Web Developer with a strong specialization in backend
-                engineering. My primary toolkit consists of Laravel, PHP, and MySQL/PostgreSQL. I focus
-                on building applications that are not just functional, but highly optimized, secure,
-                and scalable.
+                I am a professional Full-Stack Web Developer currently working at{" "}
+                <strong className="text-fg font-semibold">Innovation and Information System Limited (IISL)</strong>.
+                With a B.Sc in Computer Science &amp; Engineering from Daffodil International University (CGPA 3.40),
+                I specialize in building production-grade, scalable web applications using Laravel, PHP (OOP), MySQL, and RESTful APIs.
               </p>
               <p>
-                Whether it is designing complex database schemas, integrating third-party services,
-                writing RESTful APIs, or optimizing SQL queries for milliseconds of performance, I
-                approach every task with a focus on code quality and clean architecture.
+                My expertise spans enterprise system architecture, role-based access control (RBAC), database query optimization,
+                and server-side performance. Whether designing multi-level approval workflows for construction logistics
+                or engineering E-Learning, Restaurant, and E-Commerce platforms, I focus on clean code, security, and reliability.
               </p>
             </div>
 
@@ -80,7 +80,7 @@ export default function About() {
                       {label.split(" ")[0]}
                     </span>
                   </div>
-                  <div className="mt-3 font-mono text-3xl font-bold tracking-tight text-fg">
+                  <div className="mt-3 font-mono text-2xl font-bold tracking-tight text-fg">
                     {value}
                   </div>
                   <div className="text-xs text-fg-muted mt-1 leading-snug">

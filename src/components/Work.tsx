@@ -7,54 +7,88 @@ import Magnetic from "./Magnetic";
 const PROJECTS = [
   {
     id: "construction-mis",
-    title: "Construction MIS & Approval Engine",
-    subtitle: "Enterprise Resource Planning (ERP)",
+    title: "Construction Management System",
+    subtitle: "Enterprise Operations (IISL)",
     description:
-      "A high-concurrency management information system built to streamline multi-level approvals, bill creations, and real-time comparative statements for construction logistics.",
+      "A comprehensive construction company management platform handling end-to-end operations including multi-site logistics, bill creations, material requisitions, and real-time comparative statements.",
     challenge:
-      "Legacy system was suffering from slow, nested query loops (N+1 queries) when aggregating material rates, causing approval printouts to take upwards of 12 seconds to load.",
+      "Legacy system suffered from slow nested queries (N+1 bottleneck) when aggregating contractor rates and material purchase histories across multiple active sites.",
     solution:
-      "Restructured database indexes, refactored raw Eloquent relations into optimized database views and subqueries, and implemented Redis caching for historical audit logs.",
+      "Restructured MySQL database indexes, refactored raw Eloquent relations into optimized database subqueries, and implemented Redis caching for historical audit logs.",
     metrics: [
       { label: "Query Speedup", value: "85% faster (12s → 1.8s)", icon: Zap },
       { label: "Approval Latency", value: "<150ms", icon: Cpu },
       { label: "Data Accuracy", value: "100% Audit trail", icon: ShieldCheck },
     ],
-    tech: ["Laravel 11", "PHP 8.3", "MySQL", "Redis", "Select2 AJAX", "Bootstrap & Custom CSS"],
+    tech: ["Laravel", "PHP (OOP)", "MySQL", "RESTful APIs", "jQuery", "AJAX", "Bootstrap"],
   },
   {
-    id: "payment-recon",
-    title: "Supplier Payment & Reconciliation Engine",
-    subtitle: "Fintech Billing System",
+    id: "lms-system",
+    title: "E-Learning Management System (LMS)",
+    subtitle: "Web-Based Education Platform",
     description:
-      "A transaction ledger and reconciliation system mapping purchase indents, advances, and subcontractor invoices with precise financial auditing.",
+      "A complete classroom and online learning platform for managing courses, student enrollments, exam processing, and progress analytics.",
     challenge:
-      "Complex payment structures caused duplicate entries in print vouchers when bills were reversed or partially processed, leading to ledger discrepancies.",
+      "Handling concurrent student submissions during live online quizzes without database locking or result calculation delays.",
     solution:
-      "Implemented strict database transactions (ACID), built automated invoice-indent state machines, and enforced unique hash keys to prevent concurrent double-spend requests.",
+      "Engineered queued background processing for quiz scoring and role-based access control (Admin, Instructor, Student) with RESTful API architecture.",
     metrics: [
-      { label: "Recon Accuracy", value: "100% automatic", icon: ShieldCheck },
-      { label: "API Response Time", value: "45ms avg", icon: Cpu },
-      { label: "Ledger Errors", value: "Reduced to 0", icon: Database },
+      { label: "Concurrent Exams", value: "500+ Active Users", icon: ShieldCheck },
+      { label: "API Response", value: "45ms avg", icon: Cpu },
+      { label: "Role Control", value: "100% Granular RBAC", icon: Database },
     ],
-    tech: ["Laravel", "PostgreSQL", "Queue Workers", "REST API", "Tailwind CSS"],
+    tech: ["Laravel", "MySQL", "RESTful APIs", "JavaScript", "AJAX", "CSS3"],
   },
   {
-    id: "profile-upload",
-    title: "Optimized File Storage & Media CDN",
-    subtitle: "Microservice / Module Integration",
+    id: "restaurant-ms",
+    title: "Restaurant Operation System",
+    subtitle: "POS, Billing & Inventory Engine",
     description:
-      "A modular, secure file upload and image manipulation component designed to handle employee records, document attachments, and dynamic image sizing.",
+      "A complete restaurant operation system covering POS order billing, stock inventory management, and daily profit/sales reporting.",
     challenge:
-      "Heavy profile pictures uploaded by users bloated storage space and choked bandwidth on slow mobile connections.",
+      "Preventing inventory ledger discrepancies and race conditions during peak rush-hour order entries.",
     solution:
-      "Built a queued image optimizer that compresses files to WebP on upload, creates standard responsive image crops, and serves them via a cached path.",
+      "Implemented strict ACID database transactions, real-time stock deduplication, and staff access roles (Admin, Cashier, Manager).",
     metrics: [
-      { label: "Bandwidth Saved", value: "72% average", icon: Zap },
-      { label: "Upload Time", value: "Sub-1s processing", icon: Cpu },
-      { label: "Storage Reduction", value: "5GB to 1.4GB", icon: Database },
+      { label: "Order Speed", value: "<1s Checkout", icon: Zap },
+      { label: "Inventory Error", value: "0% Variance", icon: ShieldCheck },
+      { label: "Billing Audit", value: "Real-time Sales Log", icon: Database },
     ],
-    tech: ["Laravel Media Library", "Intervention Image", "AWS S3", "Alpine.js"],
+    tech: ["Laravel", "MySQL", "JavaScript", "AJAX", "Bootstrap"],
+  },
+  {
+    id: "e-commerce-system",
+    title: "E-Commerce Management Platform",
+    subtitle: "Scalable Retail & Order Engine",
+    description:
+      "A scalable e-commerce backend for product catalog management, customer order tracking, and logical payment workflow integration.",
+    challenge:
+      "Maintaining high backend responsiveness during large product catalog searches and order state updates.",
+    solution:
+      "Built structured REST API endpoints, full database indexing, and interactive admin analytics dashboard.",
+    metrics: [
+      { label: "Catalog Search", value: "<100ms Query Time", icon: Zap },
+      { label: "Order Tracking", value: "Real-time State Machine", icon: Cpu },
+      { label: "Backend Health", value: "Zero Unhandled Exceptions", icon: ShieldCheck },
+    ],
+    tech: ["Laravel", "MySQL", "RESTful APIs", "JSON", "Blade Templating"],
+  },
+  {
+    id: "hospital-store-ms",
+    title: "Hospital & Store Management Systems",
+    subtitle: "Operational Efficiency Modules",
+    description:
+      "Custom operations management software built for medical store record keeping, patient/product inventory tracking, and billing.",
+    challenge:
+      "Handling sensitive patient and inventory data with high security standards and strict role access.",
+    solution:
+      "Enforced server-side input validation, encrypted data fields, and role-based access control (RBAC).",
+    metrics: [
+      { label: "Security", value: "OWASP Top 10 Compliant", icon: ShieldCheck },
+      { label: "Data Retrieval", value: "Sub-200ms Search", icon: Cpu },
+      { label: "Uptime", value: "99.9% Operational", icon: Database },
+    ],
+    tech: ["Laravel", "MySQL", "RESTful APIs", "PHP (OOP)"],
   },
 ];
 
