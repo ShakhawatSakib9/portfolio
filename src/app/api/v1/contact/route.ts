@@ -12,7 +12,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const apiKey = process.env.WEB3FORMS_ACCESS_KEY;
+    const apiKey = process.env.WEB3FORMS_ACCESS_KEY || "6e646969-e3c3-4809-b2c4-1365954d31ea";
 
     // If API Key is configured, submit to Web3Forms for inbox delivery
     if (apiKey) {
