@@ -3,6 +3,8 @@ import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import CustomCursor from "@/components/CustomCursor";
+import CommandPalette from "@/components/CommandPalette";
+import PerformanceWidget from "@/components/PerformanceWidget";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -39,6 +41,8 @@ export default function RootLayout({
     >
       <body className="bg-noise">
         <CustomCursor />
+        <CommandPalette />
+        <PerformanceWidget />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

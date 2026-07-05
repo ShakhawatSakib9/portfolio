@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { playClick, playTick } from "@/utils/audio";
 
 export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
@@ -41,6 +42,7 @@ export default function CustomCursor() {
       
       if (hoverTarget) {
         ring.classList.add("hovering");
+        playTick(); // Play hover sound tick!
         const label = hoverTarget.getAttribute("data-cursor-label");
         if (label && labelRef.current) {
           labelRef.current.innerText = label;
@@ -60,15 +62,25 @@ export default function CustomCursor() {
       }
     };
 
+    const onClick = (e: MouseEvent) => {
+      const t = e.target as HTMLElement;
+      const hoverTarget = t.closest<HTMLElement>("a, button, [data-cursor='hover'], input, textarea, [data-cursor-label]");
+      if (hoverTarget) {
+        playClick(); // Play click sound!
+      }
+    };
+
     window.addEventListener("mousemove", onMove);
     document.addEventListener("mouseover", onOver);
     document.addEventListener("mouseout", onOut);
+    document.addEventListener("click", onClick);
 
     return () => {
       cancelAnimationFrame(rafId);
       window.removeEventListener("mousemove", onMove);
       document.removeEventListener("mouseover", onOver);
       document.removeEventListener("mouseout", onOut);
+      document.removeEventListener("click", onClick);
     };
   }, []);
 
