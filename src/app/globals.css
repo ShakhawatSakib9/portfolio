@@ -27,6 +27,36 @@
   --accent-2: var(--neon-violet);
 }
 
+.theme-recruiter {
+  --bg: #f8fafc;
+  --bg-soft: #f1f5f9;
+  --bg-card: #ffffff;
+  --border: #e2e8f0;
+  --border-glow: #cbd5e1;
+  --fg: #0f172a;
+  --fg-muted: #475569;
+  --fg-dim: #94a3b8;
+  --neon-cyan: #3b82f6;
+  --neon-violet: #4f46e5;
+  --neon-pink: #d946ef;
+  --neon-blue: #1d4ed8;
+}
+
+.theme-hacker {
+  --bg: #000000;
+  --bg-soft: #050505;
+  --bg-card: #080808;
+  --border: #00ff70;
+  --border-glow: #00ff70;
+  --fg: #00ff70;
+  --fg-muted: #00dd50;
+  --fg-dim: #009930;
+  --neon-cyan: #00ff70;
+  --neon-violet: #00ff70;
+  --neon-pink: #00ff70;
+  --neon-blue: #00ff70;
+}
+
 @theme inline {
   --color-bg: var(--bg);
   --color-bg-soft: var(--bg-soft);

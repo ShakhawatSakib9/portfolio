@@ -6,6 +6,7 @@ import CustomCursor from "@/components/CustomCursor";
 import CommandPalette from "@/components/CommandPalette";
 import PerformanceWidget from "@/components/PerformanceWidget";
 import { ModeProvider } from "@/context/ModeContext";
+import ThemeWrapper from "@/components/ThemeWrapper";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -42,10 +43,12 @@ export default function RootLayout({
     >
       <body className="bg-noise">
         <ModeProvider>
-          <CustomCursor />
-          <CommandPalette />
-          <PerformanceWidget />
-          <SmoothScroll>{children}</SmoothScroll>
+          <ThemeWrapper>
+            <CustomCursor />
+            <CommandPalette />
+            <PerformanceWidget />
+            <SmoothScroll>{children}</SmoothScroll>
+          </ThemeWrapper>
         </ModeProvider>
       </body>
     </html>

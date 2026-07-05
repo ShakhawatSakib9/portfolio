@@ -5,14 +5,16 @@ import gsap from "gsap";
 
 const LOGS = [
   "Initializing MSH Core Kernel v2.1...",
-  "Establishing MySQL connection pools...",
-  "Caching audit histories via Redis...",
-  "Bootstrapping React 19 Server Components...",
-  "Configuring Tailwind v4 theme engines...",
-  "Initiating Three.js 3D gyroscope scene...",
-  "Loading GSAP ScrollTrigger animations...",
-  "Reconciliation systems online...",
-  "SYSTEM ONLINE. Launching workspace...",
+  "Connecting MySQL database pools...",
+  "Running migrations:",
+  "  Migrating: 2026_07_05_000001_create_skills_table .......... [DONE]",
+  "  Migrating: 2026_07_05_000002_create_case_studies_table .... [DONE]",
+  "  Migrating: 2026_07_05_000003_create_incident_logs_table ... [DONE]",
+  "Seeding: PortfolioDatabaseSeeder .......................... [100%]",
+  "Caching database indices via Redis key-value store ........ [DONE]",
+  "Booting Vercel serverless telemetry endpoints ............. [READY]",
+  "Spinning up Laravel Reverb WebSocket broadcaster .......... [ONLINE]",
+  "SYSTEM ONLINE. Handshake established.",
 ];
 
 export default function Preloader({ onComplete }: { onComplete: () => void }) {

@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { Terminal, Search, ArrowRight, HelpCircle, Code, Volume2, VolumeX, Download, Eye } from "lucide-react";
 import { playClick, playChime, playTick, toggleSound, isSoundEnabled } from "@/utils/audio";
+import { useMode } from "@/context/ModeContext";
 
 interface Command {
   id: string;
@@ -20,6 +21,7 @@ export default function CommandPalette() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [muted, setMuted] = useState(true);
   const listRef = useRef<HTMLDivElement>(null);
+  const { isHackerMode, setHackerMode } = useMode();
 
   useEffect(() => {
     // Sync sound state from localStorage
@@ -195,6 +197,14 @@ export default function CommandPalette() {
       setSelectedIndex((prev) => (prev - 1 + filtered.length) % filtered.length);
     } else if (e.key === "Enter") {
       e.preventDefault();
+      const cleanSearch = search.trim().toLowerCase();
+      if (cleanSearch === "sudo su" || cleanSearch === "root" || cleanSearch === "hacker" || cleanSearch === "matrix") {
+        setHackerMode(!isHackerMode);
+        playChime();
+        setIsOpen(false);
+        setSearch("");
+        return;
+      }
       if (filtered[selectedIndex]) {
         runCommand(filtered[selectedIndex]);
       }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { playClick, playTick } from "@/utils/audio";
+import { playClick, playTick, updateAudioPan } from "@/utils/audio";
 
 export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
@@ -23,6 +23,10 @@ export default function CustomCursor() {
       mouseX = e.clientX;
       mouseY = e.clientY;
       dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+
+      // Update sound engine spatial pan
+      const pan = (e.clientX / window.innerWidth) * 2 - 1;
+      updateAudioPan(pan);
     };
 
     // Ring follows with easing
