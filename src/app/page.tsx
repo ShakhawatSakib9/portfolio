@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
+import Preloader from "@/components/Preloader";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -17,8 +18,12 @@ if (typeof window !== "undefined") {
 }
 
 export default function Home() {
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    // Setup global scroll reveals
+    if (loading) return;
+
+    // Setup global scroll reveals after preloader is done
     const elements = gsap.utils.toArray<HTMLElement>(".reveal");
     
     elements.forEach((el) => {
@@ -38,10 +43,11 @@ export default function Home() {
     return () => {
       ScrollTrigger.getAll().forEach(t => t.kill());
     };
-  }, []);
+  }, [loading]);
 
   return (
     <>
+      {loading && <Preloader onComplete={() => setLoading(false)} />}
       <Navbar />
       <main className="relative">
         <Hero />

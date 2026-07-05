@@ -84,33 +84,43 @@ export default function Skills() {
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {SKILLS.map((skill) => {
             const Icon = skill.icon;
-            return (
-              <div
-                key={skill.name}
-                className="reveal group relative overflow-hidden rounded-2xl border border-border bg-bg-card p-6 transition-all duration-300 hover:border-transparent hover:-translate-y-1.5"
-                style={
-                  {
-                    "--hover-shadow": `0 10px 30px -10px ${skill.color}50`,
-                    "--hover-border": skill.color,
-                  } as React.CSSProperties
-                }
-              >
-                {/* Glow Background Shader */}
-                <div
-                  className="absolute inset-0 z-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  style={{
-                    background: `radial-gradient(circle at 100% 0%, ${skill.color}15 0%, transparent 60%)`,
-                  }}
-                />
+              const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+                const card = e.currentTarget;
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty("--mouse-x", `${x}px`);
+                card.style.setProperty("--mouse-y", `${y}px`);
+              };
 
-                {/* Custom Glowing Border on Hover */}
+              return (
                 <div
-                  className="absolute inset-0 rounded-2xl border border-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none"
-                  style={{
-                    borderColor: skill.color,
-                    boxShadow: `0 0 20px -8px ${skill.color}`,
-                  }}
-                />
+                  key={skill.name}
+                  onMouseMove={handleMouseMove}
+                  className="reveal group relative overflow-hidden rounded-2xl border border-border bg-bg-card p-6 transition-all duration-300 hover:border-transparent hover:-translate-y-1.5"
+                  style={
+                    {
+                      "--hover-shadow": `0 10px 30px -10px ${skill.color}50`,
+                      "--hover-border": skill.color,
+                    } as React.CSSProperties
+                  }
+                >
+                  {/* Mouse Spotlight Glow Background */}
+                  <div
+                    className="absolute inset-0 z-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none"
+                    style={{
+                      background: `radial-gradient(280px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), ${skill.color}20, transparent 80%)`,
+                    }}
+                  />
+
+                  {/* Custom Glowing Border on Hover */}
+                  <div
+                    className="absolute inset-0 rounded-2xl border border-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none"
+                    style={{
+                      borderColor: skill.color,
+                      boxShadow: `0 0 20px -8px ${skill.color}`,
+                    }}
+                  />
 
                 <div className="relative z-10 flex flex-col h-full justify-between">
                   <div>
