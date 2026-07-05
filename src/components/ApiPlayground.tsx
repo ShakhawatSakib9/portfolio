@@ -58,7 +58,7 @@ export default function ApiPlayground() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
           
           {/* Text panel (5 cols) */}
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-5 reveal">
             <p className="font-mono text-xs uppercase tracking-[0.3em] text-neon-cyan">// 04. API Playground</p>
             <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-fg">
               Test my <span className="text-gradient">Backend API</span> in Real-time
@@ -126,7 +126,7 @@ export default function ApiPlayground() {
           </div>
 
           {/* Terminal panel (7 cols) */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 reveal">
             <div className="relative overflow-hidden rounded-2xl border border-border bg-bg-card shadow-2xl">
               {/* Terminal top header bar */}
               <div className="flex items-center justify-between border-b border-border bg-bg/80 px-5 py-3">

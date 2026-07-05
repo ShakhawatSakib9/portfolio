@@ -67,7 +67,7 @@ export default function Work() {
       <div className="pointer-events-none absolute -bottom-40 right-10 h-[36rem] w-[36rem] rounded-full bg-[radial-gradient(circle,rgba(0,255,242,0.06),transparent_60%)] blur-3xl" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="max-w-3xl">
+        <div className="max-w-3xl reveal">
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-neon-cyan">// 03. Selected Work</p>
           <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-fg">
             Case Studies: Solving <span className="text-gradient">Real Problems</span>
@@ -81,7 +81,7 @@ export default function Work() {
         <div className="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-12">
           
           {/* Navigation Tabs (4 cols) */}
-          <div className="lg:col-span-4 flex flex-col gap-3">
+          <div className="lg:col-span-4 flex flex-col gap-3 reveal">
             {PROJECTS.map((proj) => {
               const isActive = activeProject === proj.id;
               return (
@@ -110,7 +110,7 @@ export default function Work() {
           </div>
 
           {/* Active Case Study Details (8 cols) */}
-          <div className="lg:col-span-8">
+          <div className="lg:col-span-8 reveal">
             {PROJECTS.map((proj) => {
               if (proj.id !== activeProject) return null;
               return (

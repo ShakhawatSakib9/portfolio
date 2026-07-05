@@ -69,7 +69,7 @@ export default function Skills() {
       <div className="pointer-events-none absolute -bottom-40 left-0 h-96 w-96 rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.06),transparent_60%)] blur-2xl" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="max-w-3xl">
+        <div className="max-w-3xl reveal">
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-neon-cyan">// 02. Technical Arsenal</p>
           <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-fg">
             My Tech Stack &amp; <span className="text-gradient">Capabilities</span>
@@ -87,7 +87,7 @@ export default function Skills() {
             return (
               <div
                 key={skill.name}
-                className="group relative overflow-hidden rounded-2xl border border-border bg-bg-card p-6 transition-all duration-300 hover:border-transparent hover:-translate-y-1.5"
+                className="reveal group relative overflow-hidden rounded-2xl border border-border bg-bg-card p-6 transition-all duration-300 hover:border-transparent hover:-translate-y-1.5"
                 style={
                   {
                     "--hover-shadow": `0 10px 30px -10px ${skill.color}50`,

@@ -21,7 +21,7 @@ export default function About() {
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-12 lg:items-center">
           
           {/* Profile Image Column (5 cols) */}
-          <div className="lg:col-span-5 flex justify-center">
+          <div className="lg:col-span-5 flex justify-center reveal">
             <div className="relative group max-w-sm w-full aspect-square">
               {/* Decorative neon borders */}
               <div className="absolute inset-0 rounded-3xl border border-neon-cyan/40 scale-105 transition-transform duration-500 group-hover:scale-110 group-hover:border-neon-cyan" />
@@ -44,7 +44,7 @@ export default function About() {
           </div>
 
           {/* Biography Column (7 cols) */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 reveal">
             <p className="font-mono text-xs uppercase tracking-[0.3em] text-neon-cyan">// 01. About Me</p>
             <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-fg">
               Architecting solid <span className="text-gradient">backends</span>{" & "}elegant APIs

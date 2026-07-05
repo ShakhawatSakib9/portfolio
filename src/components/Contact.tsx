@@ -30,7 +30,7 @@ export default function Contact() {
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
           
           {/* Info Panel (5 cols) */}
-          <div className="lg:col-span-5 flex flex-col justify-between">
+          <div className="lg:col-span-5 flex flex-col justify-between reveal">
             <div>
               <p className="font-mono text-xs uppercase tracking-[0.3em] text-neon-cyan">// 05. Get In Touch</p>
               <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl text-fg">
@@ -90,7 +90,7 @@ export default function Contact() {
           </div>
 
           {/* Form Panel (7 cols) */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 reveal">
             <div className="rounded-3xl border border-border bg-bg-card/40 p-8 backdrop-blur-sm">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
