@@ -17,6 +17,12 @@ const ENDPOINTS = [
     url: "/api/v1/metrics",
     description: "Queries active connections, average query times, and database optimization stats.",
   },
+  {
+    id: "bkash-payment",
+    method: "POST",
+    url: "/api/v1/payment/bkash-verify",
+    description: "Executes tokenized bKash payment verification agreement and webhook response.",
+  },
 ];
 
 export default function ApiPlayground() {
@@ -34,7 +40,9 @@ export default function ApiPlayground() {
 
     const startTime = Date.now();
     try {
-      const res = await fetch(selected.url);
+      const res = await fetch(selected.url, {
+        method: selected.method,
+      });
       const data = await res.json();
       const endTime = Date.now();
       
