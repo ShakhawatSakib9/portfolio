@@ -77,7 +77,7 @@ export default function Contact() {
               <div className="mt-8 space-y-4">
                 <a
                   href="mailto:shakhawat.sakib9@gmail.com"
-                  className="flex items-center gap-4 rounded-2xl border border-border bg-bg-card/40 p-4 hover:border-neon-cyan/40 transition-colors w-fit"
+                  className="flex items-center gap-4 rounded-2xl border border-border bg-bg-card p-4 hover:border-neon-cyan/40 transition-colors w-fit"
                 >
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-bg border border-border-glow text-neon-cyan">
                     <Mail className="h-5 w-5" />
@@ -92,7 +92,7 @@ export default function Contact() {
                   </div>
                 </a>
 
-                <div className="flex items-center gap-4 rounded-2xl border border-border bg-bg-card/40 p-4 w-fit">
+                <div className="flex items-center gap-4 rounded-2xl border border-border bg-bg-card p-4 w-fit">
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-bg border border-border-glow text-neon-violet">
                     <span className="font-mono text-xs font-bold">BD</span>
                   </div>
@@ -138,7 +138,7 @@ export default function Contact() {
 
           {/* Form Panel (7 cols) */}
           <div className="lg:col-span-7 reveal">
-            <div className="rounded-3xl border border-border bg-bg-card/40 p-8 backdrop-blur-sm">
+            <div className="rounded-3xl border border-border bg-bg-card p-8 backdrop-blur-sm">
               {status === "success" ? (
                 <div className="space-y-4 font-mono text-center py-8 animate-fade-in">
                   <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
@@ -160,7 +160,7 @@ export default function Contact() {
                   </button>
                 </div>
               ) : status === "sending" ? (
-                <div className="space-y-4 font-mono text-xs text-neon-cyan p-4 border border-neon-cyan/20 bg-bg/50 rounded-2xl animate-fade-in leading-relaxed">
+                <div className="space-y-4 font-mono text-xs text-neon-cyan p-4 border border-neon-cyan/20 bg-bg-soft rounded-2xl animate-fade-in leading-relaxed">
                   <div className="flex justify-between items-center border-b border-neon-cyan/15 pb-2">
                     <span className="font-bold text-[10px] tracking-wider uppercase">[ HANDOFF PROTOCOL ACTIVE ]</span>
                     <span className="animate-pulse">● PROCESSING</span>
@@ -190,7 +190,7 @@ export default function Contact() {
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full rounded-xl border border-border bg-bg/40 p-4 font-mono text-sm text-fg outline-none transition-all focus:border-neon-cyan/70 focus:ring-1 focus:ring-neon-cyan/20"
+                        className="w-full rounded-xl border border-border bg-bg-soft p-4 font-mono text-sm text-fg outline-none transition-all focus:border-neon-cyan/70 focus:ring-1 focus:ring-neon-cyan/20"
                         placeholder="John Doe"
                       />
                     </div>
@@ -204,7 +204,7 @@ export default function Contact() {
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full rounded-xl border border-border bg-bg/40 p-4 font-mono text-sm text-fg outline-none transition-all focus:border-neon-cyan/70 focus:ring-1 focus:ring-neon-cyan/20"
+                        className="w-full rounded-xl border border-border bg-bg-soft p-4 font-mono text-sm text-fg outline-none transition-all focus:border-neon-cyan/70 focus:ring-1 focus:ring-neon-cyan/20"
                         placeholder="john@example.com"
                       />
                     </div>
@@ -220,7 +220,7 @@ export default function Contact() {
                       required
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full rounded-xl border border-border bg-bg/40 p-4 font-mono text-sm text-fg outline-none transition-all focus:border-neon-cyan/70 focus:ring-1 focus:ring-neon-cyan/20"
+                      className="w-full rounded-xl border border-border bg-bg-soft p-4 font-mono text-sm text-fg outline-none transition-all focus:border-neon-cyan/70 focus:ring-1 focus:ring-neon-cyan/20"
                       placeholder="Project Inquiry"
                     />
                   </div>
@@ -235,7 +235,7 @@ export default function Contact() {
                       rows={5}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full rounded-xl border border-border bg-bg/40 p-4 font-mono text-sm text-fg outline-none transition-all focus:border-neon-cyan/70 focus:ring-1 focus:ring-neon-cyan/20 resize-none"
+                      className="w-full rounded-xl border border-border bg-bg-soft p-4 font-mono text-sm text-fg outline-none transition-all focus:border-neon-cyan/70 focus:ring-1 focus:ring-neon-cyan/20 resize-none"
                       placeholder="Hello Shakhawat, let's collaborate on..."
                     />
                   </div>

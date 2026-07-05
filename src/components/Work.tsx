@@ -323,8 +323,8 @@ export default function Work() {
 
                   {/* Challenge & Solution Grid */}
                   <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                    <div className="rounded-2xl border border-border/60 bg-bg/40 p-5">
-                      <span className="font-mono text-[11px] uppercase tracking-wider text-red-400 font-semibold block mb-2">
+                    <div className="rounded-2xl border border-border/80 bg-bg-soft p-5">
+                      <span className="font-mono text-[11px] uppercase tracking-wider text-red-500 font-semibold block mb-2">
                         [ The Challenge ]
                       </span>
                       <p className="text-xs text-fg-muted leading-relaxed">
@@ -332,7 +332,7 @@ export default function Work() {
                       </p>
                     </div>
 
-                    <div className="rounded-2xl border border-neon-cyan/20 bg-neon-cyan/5 p-5">
+                    <div className="rounded-2xl border border-neon-cyan/30 bg-neon-cyan/5 p-5">
                       <span className="font-mono text-[11px] uppercase tracking-wider text-neon-cyan font-semibold block mb-2">
                         [ The Architecture Solution ]
                       </span>
@@ -351,7 +351,7 @@ export default function Work() {
                       {activeProject.metrics.map(({ label, value, icon: Icon }) => (
                         <div
                           key={label}
-                          className="rounded-xl border border-border/80 bg-bg/60 p-3.5 backdrop-blur-sm"
+                          className="rounded-xl border border-border/80 bg-bg-soft p-3.5 backdrop-blur-sm"
                         >
                           <div className="flex items-center gap-2 text-neon-violet">
                             <Icon className="h-3.5 w-3.5" />
@@ -438,10 +438,10 @@ export default function Work() {
                     <span className="font-mono text-[11px] uppercase text-neon-cyan tracking-wider block mb-3">
                       // 2. Before ➔ After Performance Observatory
                     </span>
-                    <div className="overflow-x-auto rounded-2xl border border-border/80 bg-bg/40">
+                    <div className="overflow-x-auto rounded-2xl border border-border/80 bg-bg-soft">
                       <table className="w-full text-left font-mono text-xs border-collapse">
                         <thead>
-                          <tr className="border-b border-border/80 bg-bg-card/40 text-fg-dim">
+                          <tr className="border-b border-border/80 bg-bg-card text-fg-dim">
                             <th className="p-3">Metric</th>
                             <th className="p-3">Before</th>
                             <th className="p-3">After (Optimized)</th>

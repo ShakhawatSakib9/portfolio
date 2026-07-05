@@ -69,7 +69,7 @@ export default function About() {
               {STATS.map(({ icon: Icon, value, label }) => (
                 <div
                   key={label}
-                  className="relative overflow-hidden rounded-2xl border border-border bg-bg-card/40 p-5 backdrop-blur-sm glow-hover"
+                  className="relative overflow-hidden rounded-2xl border border-border bg-bg-card p-5 backdrop-blur-sm glow-hover"
                 >
                   {/* Subtle top indicator bar */}
                   <span className="absolute top-0 left-4 right-4 h-[1px] bg-gradient-to-r from-transparent via-neon-cyan/40 to-transparent" />
