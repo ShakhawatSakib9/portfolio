@@ -7,6 +7,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import Preloader from "@/components/Preloader";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import Marquee from "@/components/Marquee";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Work from "@/components/Work";
@@ -51,6 +52,7 @@ export default function Home() {
       <Navbar />
       <main className="relative">
         <Hero />
+        <Marquee />
         <About />
         <Skills />
         <Work />

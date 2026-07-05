@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
+  const labelRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     // Skip on touch devices
@@ -33,17 +34,29 @@ export default function CustomCursor() {
     };
     rafId = requestAnimationFrame(tick);
 
-    // Grow ring over interactive elements
+    // Grow ring over interactive elements & handle labels
     const onOver = (e: MouseEvent) => {
       const t = e.target as HTMLElement;
-      if (t.closest("a, button, [data-cursor='hover'], input, textarea")) {
+      const hoverTarget = t.closest<HTMLElement>("a, button, [data-cursor='hover'], input, textarea, [data-cursor-label]");
+      
+      if (hoverTarget) {
         ring.classList.add("hovering");
+        const label = hoverTarget.getAttribute("data-cursor-label");
+        if (label && labelRef.current) {
+          labelRef.current.innerText = label;
+          labelRef.current.style.opacity = "1";
+        }
       }
     };
     const onOut = (e: MouseEvent) => {
       const t = e.target as HTMLElement;
-      if (t.closest("a, button, [data-cursor='hover'], input, textarea")) {
+      const hoverTarget = t.closest<HTMLElement>("a, button, [data-cursor='hover'], input, textarea, [data-cursor-label]");
+      
+      if (hoverTarget) {
         ring.classList.remove("hovering");
+        if (labelRef.current) {
+          labelRef.current.style.opacity = "0";
+        }
       }
     };
 
@@ -61,7 +74,12 @@ export default function CustomCursor() {
 
   return (
     <>
-      <div ref={ringRef} className="cursor-ring" aria-hidden />
+      <div ref={ringRef} className="cursor-ring flex items-center justify-center" aria-hidden>
+        <span
+          ref={labelRef}
+          className="pointer-events-none opacity-0 transition-opacity duration-200 font-mono text-[9px] uppercase tracking-wider text-neon-cyan whitespace-nowrap bg-bg/90 px-2 py-0.5 rounded border border-neon-cyan/40 shadow-[0_0_10px_var(--neon-cyan)] translate-y-8"
+        />
+      </div>
       <div ref={dotRef} className="cursor-dot" aria-hidden />
     </>
   );

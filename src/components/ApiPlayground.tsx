@@ -107,6 +107,7 @@ export default function ApiPlayground() {
                 <button
                   onClick={handleSend}
                   disabled={loading}
+                  data-cursor-label="[ EXECUTE API ]"
                   className="group inline-flex items-center gap-2 rounded-full bg-neon-cyan px-6 py-3 font-mono text-xs uppercase tracking-widest text-black transition-shadow hover:shadow-[0_0_20px_var(--neon-cyan)] disabled:opacity-50"
                 >
                   {loading ? (
