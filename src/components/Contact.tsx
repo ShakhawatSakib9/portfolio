@@ -256,7 +256,7 @@ export default function Contact() {
         </div>
 
         {/* Footer bottom meta info */}
-        <div className="mt-20 pt-8 border-t border-border/60 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-20 pt-8 border-t border-border/60 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between pb-12 sm:pb-16">
           <div className="font-mono text-[10px] text-fg-dim uppercase tracking-wider">
             &copy; {new Date().getFullYear()} Md. Shakhawat Hossain. All rights reserved.
           </div>
