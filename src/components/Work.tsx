@@ -1,11 +1,52 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Zap, Cpu, ShieldCheck, Database, Lock, Eye, ArrowRight, HelpCircle } from "lucide-react";
 import { useMode } from "@/context/ModeContext";
 import { playClick, playTick } from "@/utils/audio";
 import TraceSimulator from "@/components/TraceSimulator";
 import ArchitectureMatrix from "@/components/ArchitectureMatrix";
+
+function TiltCard({ children, className }: { children: React.ReactNode; className: string }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [rotateX, setRotateX] = useState(0);
+  const [rotateY, setRotateY] = useState(0);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const xc = rect.width / 2;
+    const yc = rect.height / 2;
+    const rotateY = ((x - xc) / xc) * 6; // Max 6 degrees
+    const rotateX = ((yc - y) / yc) * 6; // Max 6 degrees
+    setRotateX(rotateX);
+    setRotateY(rotateY);
+  };
+
+  const handleMouseLeave = () => {
+    setRotateX(0);
+    setRotateY(0);
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
+        transition: "transform 0.15s ease-out",
+        transformStyle: "preserve-3d",
+      }}
+      className={className}
+    >
+      {children}
+    </div>
+  );
+}
 
 interface ArchitectureNode {
   name: string;
@@ -293,7 +334,7 @@ export default function Work() {
 
           {/* Detailed Project Card (7 cols) */}
           <div className="lg:col-span-7 reveal">
-            <div className="relative overflow-hidden rounded-3xl border border-border/80 bg-bg-card/60 p-8 sm:p-10 backdrop-blur-md shadow-2xl">
+            <TiltCard className="relative overflow-hidden rounded-3xl border border-border/80 bg-bg-card/60 p-8 sm:p-10 backdrop-blur-md shadow-2xl">
               {/* Header Info */}
               <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border/60 pb-6">
                 <div>
@@ -375,24 +416,45 @@ export default function Work() {
                     <span className="font-mono text-[11px] uppercase text-neon-violet tracking-wider block mb-3">
                       // 1. Live Architecture Explorer (Click Nodes)
                     </span>
-                    <div className="flex flex-wrap items-center gap-2.5 p-4 rounded-2xl bg-bg/60 border border-border/80">
+                    <div className="grid grid-cols-2 md:flex md:flex-wrap items-center gap-4 p-5 rounded-2xl bg-bg-soft border border-border/80">
                       {activeProject.architectureMap.map((node, index) => (
-                        <div key={node.name} className="flex items-center gap-2">
+                        <div key={node.name} className="flex flex-col md:flex-row items-center gap-3 flex-1 min-w-[110px]">
                           <button
                             onClick={() => {
                               playTick();
                               setActiveNodeIdx(activeNodeIdx === index ? null : index);
                             }}
-                            className={`px-3 py-2 rounded-lg font-mono text-[10px] border transition-all ${
+                            className={`w-full px-3 py-2.5 rounded-xl font-mono text-[10px] border transition-all duration-300 relative text-center ${
                               activeNodeIdx === index
-                                ? "bg-neon-cyan/15 border-neon-cyan text-neon-cyan shadow-[0_0_12px_rgba(0,255,242,0.2)]"
-                                : "bg-bg border-border text-fg-muted hover:border-fg-dim"
+                                ? "bg-neon-cyan/15 border-neon-cyan text-neon-cyan shadow-[0_0_15px_rgba(0,255,242,0.15)] font-bold scale-[1.03]"
+                                : "bg-bg-card border-border text-fg-muted hover:border-fg hover:text-fg"
                             }`}
                           >
                             {node.name}
                           </button>
                           {index < activeProject.architectureMap.length - 1 && (
-                            <span className="text-fg-dim text-[10px]">➔</span>
+                            <div className="hidden md:flex flex-1 items-center justify-center min-w-[30px] h-4">
+                              <svg className="w-full h-1 overflow-visible" xmlns="http://www.w3.org/2000/svg">
+                                <line
+                                  x1="0"
+                                  y1="2"
+                                  x2="100%"
+                                  y2="2"
+                                  stroke="var(--border)"
+                                  strokeWidth="1.5"
+                                />
+                                <line
+                                  x1="0"
+                                  y1="2"
+                                  x2="100%"
+                                  y2="2"
+                                  stroke={activeNodeIdx === index ? "var(--neon-cyan)" : "var(--neon-violet)"}
+                                  strokeWidth="2"
+                                  strokeDasharray="6 6"
+                                  className="animate-flow-dash"
+                                />
+                              </svg>
+                            </div>
                           )}
                         </div>
                       ))}
@@ -529,7 +591,7 @@ export default function Work() {
                   ))}
                 </div>
               </div>
-            </div>
+            </TiltCard>
           </div>
         </div>
       </div>

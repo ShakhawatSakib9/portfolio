@@ -10,6 +10,19 @@ export default function ThemeWrapper({ children }: { children: React.ReactNode }
   const [clickTimes, setClickTimes] = useState<number[]>([]);
   const [isGodMode, setIsGodMode] = useState(false);
   const [konamiIdx, setKonamiIdx] = useState(0);
+  const [isSweeping, setIsSweeping] = useState(false);
+  const [prevMode, setPrevMode] = useState(mode);
+
+  useEffect(() => {
+    if (mode !== prevMode) {
+      setIsSweeping(true);
+      setPrevMode(mode);
+      const timer = setTimeout(() => {
+        setIsSweeping(false);
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [mode, prevMode]);
 
   const konamiCode = [
     "ArrowUp",
@@ -107,6 +120,7 @@ export default function ThemeWrapper({ children }: { children: React.ReactNode }
     >
       <MatrixRain />
       <GlitchOverlay />
+      {isSweeping && <div className="wipe-overlay animate-wipe" />}
       {isGodMode && (
         <div className="fixed inset-0 z-[9999999] flex items-center justify-center bg-black/98 text-emerald-400 font-mono p-6 select-none">
           <div className="w-full max-w-sm border border-emerald-500/30 rounded-2xl bg-emerald-500/5 p-6 text-center space-y-5 shadow-[0_0_50px_rgba(16,185,129,0.15)] backdrop-blur-md">

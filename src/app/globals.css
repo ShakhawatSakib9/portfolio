@@ -226,3 +226,37 @@ body {
   opacity: 0;
   transform: translateY(30px);
 }
+
+/* Mode Switch Sweep Animation */
+.wipe-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: linear-gradient(to bottom, transparent, var(--neon-cyan), transparent);
+  height: 200vh;
+  top: -100vh;
+  pointer-events: none;
+  border-bottom: 2px solid var(--neon-cyan);
+}
+.animate-wipe {
+  animation: wipe-sweep 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes wipe-sweep {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* Animated flow-dash keyframe */
+@keyframes flow-dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+.animate-flow-dash {
+  animation: flow-dash 1.2s linear infinite;
+}
