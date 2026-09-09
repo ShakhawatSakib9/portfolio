@@ -38,17 +38,17 @@ export default function About() {
 
       <div className="relative z-10 mx-auto w-full max-w-[1600px] px-4 sm:px-10 lg:px-16 2xl:px-20">
         <div className="grid grid-cols-1 gap-12 lg:gap-16 2xl:gap-20 lg:grid-cols-12 lg:items-center">
-          
+
           {/* Profile Image Column (5 cols) */}
           <div className="lg:col-span-5 flex flex-col items-center lg:items-start reveal">
             <div className="relative group max-w-[390px] sm:max-w-[430px] 2xl:max-w-[450px] w-full">
-              
+
               {/* Outer Glow Halo */}
               <div className="absolute -inset-1 rounded-[2.5rem] bg-gradient-to-tr from-neon-cyan/30 via-sky-500/20 to-transparent blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500" />
-              
+
               {/* Main Card Container */}
               <div className="relative w-full rounded-[2.2rem] border border-border bg-bg-card/90 shadow-2xl p-5 backdrop-blur-md overflow-hidden transition-transform duration-500 group-hover:scale-[1.01]">
-                
+
                 {/* Top Terminal Bar */}
                 <div className="flex items-center justify-between pb-4 mb-4 border-b border-border/70">
                   <div className="flex items-center gap-1.5">
@@ -72,10 +72,10 @@ export default function About() {
 
                 {/* Portrait Canvas with Tech Background */}
                 <div className="relative w-full aspect-[4/4.8] rounded-2xl overflow-hidden bg-gradient-to-b from-neon-cyan/10 via-bg-card to-bg border border-border/80 flex items-center justify-center">
-                  
+
                   {/* Subtle Grid Pattern */}
                   <div className="absolute inset-0 bg-[linear-gradient(to_right,#0ea5e90a_1px,transparent_1px),linear-gradient(to_bottom,#0ea5e90a_1px,transparent_1px)] bg-[size:24px_24px]" />
-                  
+
                   {/* Glowing Radial Core */}
                   <div className="absolute h-64 w-64 rounded-full bg-[radial-gradient(circle,rgba(14,165,233,0.22),transparent_70%)] blur-2xl" />
 
@@ -147,7 +147,7 @@ export default function About() {
             <p className="font-mono text-xs uppercase tracking-[0.3em] text-neon-cyan font-semibold">
               // 01. About Me · Professional Background
             </p>
-            
+
             <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-fg leading-[1.2]">
               Software Developer at{" "}
               <span className="text-gradient">IISBD</span>
@@ -156,12 +156,12 @@ export default function About() {
                 Full-Stack Laravel Engineer
               </span>
             </h2>
-            
+
             <div className="mt-6 space-y-4 text-fg-muted text-base leading-relaxed sm:text-lg">
               <p>
                 I am a professional Full-Stack Web Developer (Laravel-focused) currently engineering production-level web applications at{" "}
                 <strong className="text-fg font-semibold">Innovation and Information System Limited (IISBD)</strong> in Dhaka, Bangladesh. Holding a B.Sc. in CSE from{" "}
-                <strong className="text-fg font-semibold">Daffodil International University (CGPA 3.40)</strong> and currently pursuing a Master&apos;s in CSE at{" "}
+                <strong className="text-fg font-semibold">Daffodil International University (DIU)</strong> and currently pursuing a Master&apos;s in CSE at{" "}
                 <strong className="text-fg font-semibold">Jahangirnagar University (JU)</strong>, I combine solid computer science fundamentals with hands-on enterprise software craftsmanship.
               </p>
               <p>
@@ -177,7 +177,7 @@ export default function About() {
                   className="relative overflow-hidden rounded-2xl border border-border bg-bg-card/80 p-4 sm:p-5 backdrop-blur-sm glow-hover transition-all duration-300 group hover:-translate-y-0.5"
                 >
                   <span className="absolute top-0 left-4 right-4 h-[1.5px] bg-gradient-to-r from-transparent via-neon-cyan/50 to-transparent" />
-                  
+
                   <div className="flex items-center gap-3">
                     <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-neon-cyan/15 text-neon-cyan border border-neon-cyan/30 group-hover:scale-105 transition-transform">
                       <Icon className="h-4.5 w-4.5" />
@@ -186,7 +186,7 @@ export default function About() {
                       {title}
                     </h3>
                   </div>
-                  
+
                   <p className="mt-2.5 text-xs text-fg-muted leading-relaxed">
                     {description}
                   </p>
@@ -205,7 +205,7 @@ export default function About() {
               ))}
             </div>
           </div>
-          
+
         </div>
       </div>
     </section>
