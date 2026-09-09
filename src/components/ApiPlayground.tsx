@@ -60,23 +60,25 @@ export default function ApiPlayground() {
   return (
     <section id="playground" className="relative py-24 lg:py-32 overflow-hidden bg-bg-soft">
       {/* Accent ambient glow */}
-      <div className="pointer-events-none absolute top-1/2 left-0 h-[36rem] w-[36rem] -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.06),transparent_60%)] blur-3xl" />
+      <div className="pointer-events-none absolute top-1/2 left-0 h-[36rem] w-[36rem] -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(14,165,233,0.06),transparent_60%)] blur-3xl" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
+      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-6 sm:px-10 lg:px-16 2xl:px-20">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center">
           
           {/* Text panel (5 cols) */}
           <div className="lg:col-span-5 reveal">
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-neon-cyan">// 04. API Playground</p>
-            <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-fg">
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-neon-cyan font-semibold">
+              // 04. API Playground
+            </p>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-fg leading-tight">
               Test my <span className="text-gradient">Backend API</span> in Real-time
             </h2>
             <p className="mt-4 text-base text-fg-muted leading-relaxed sm:text-lg">
-              Don&apos;t just read about code — verify it. Select an endpoint on the right and hit send. A live serverless function will process the request and return real metrics.
+              Don&apos;t just read about code — verify it. Select an endpoint on the left and hit send. A live serverless function will process the request and return real metrics.
             </p>
 
             {/* Endpoint selectors */}
-            <div className="mt-8 space-y-4">
+            <div className="mt-8 space-y-3.5">
               {ENDPOINTS.map((ep) => {
                 const isActive = selected.id === ep.id;
                 return (
@@ -88,20 +90,20 @@ export default function ApiPlayground() {
                       setLatency(null);
                       setHttpStatus(null);
                     }}
-                    className={`w-full flex items-start gap-4 rounded-xl border p-4 text-left transition-all ${
+                    className={`w-full flex items-start gap-3.5 rounded-2xl border p-4 text-left transition-all ${
                       isActive
-                        ? "bg-bg-card border-neon-cyan/50"
-                        : "bg-bg/40 border-border hover:border-border-glow"
+                        ? "bg-bg-card border-neon-cyan/60 shadow-[0_0_20px_rgba(14,165,233,0.12)]"
+                        : "bg-bg-card/40 border-border hover:border-border-glow hover:bg-bg-card/70"
                     }`}
                   >
-                    <span className="font-mono text-xs font-bold text-neon-cyan px-2 py-0.5 rounded bg-neon-cyan/10">
+                    <span className="font-mono text-xs font-bold text-neon-cyan px-2.5 py-1 rounded-lg bg-neon-cyan/15 border border-neon-cyan/30 shrink-0">
                       {ep.method}
                     </span>
                     <div>
-                      <span className="block font-mono text-xs font-semibold text-fg">
+                      <span className="block font-mono text-xs font-bold text-fg">
                         {ep.url}
                       </span>
-                      <span className="block text-xs text-fg-muted mt-1 leading-normal">
+                      <span className="block text-xs text-fg-muted mt-1 leading-relaxed">
                         {ep.description}
                       </span>
                     </div>
@@ -116,12 +118,12 @@ export default function ApiPlayground() {
                   onClick={handleSend}
                   disabled={loading}
                   data-cursor-label="[ EXECUTE API ]"
-                  className="group inline-flex items-center gap-2 rounded-full bg-neon-cyan px-6 py-3 font-mono text-xs uppercase tracking-widest text-black transition-shadow hover:shadow-[0_0_20px_var(--neon-cyan)] disabled:opacity-50"
+                  className="group inline-flex items-center gap-2.5 rounded-full bg-neon-cyan px-7 py-3.5 font-mono text-xs uppercase tracking-widest text-slate-950 font-bold transition-all hover:shadow-[0_0_25px_var(--neon-cyan)] hover:scale-105 active:scale-95 disabled:opacity-50"
                 >
                   {loading ? (
                     <>
                       Executing...
-                      <span className="h-4 w-4 animate-spin rounded-full border-2 border-black border-t-transparent" />
+                      <span className="h-4 w-4 animate-spin rounded-full border-2 border-slate-950 border-t-transparent" />
                     </>
                   ) : (
                     <>
@@ -136,25 +138,25 @@ export default function ApiPlayground() {
 
           {/* Terminal panel (7 cols) */}
           <div className="lg:col-span-7 reveal">
-            <div className="relative overflow-hidden rounded-2xl border border-border bg-bg-card shadow-2xl">
+            <div className="relative overflow-hidden rounded-3xl border border-slate-800 bg-slate-950 shadow-2xl">
               {/* Terminal top header bar */}
-              <div className="flex items-center justify-between border-b border-border bg-bg/80 px-5 py-3">
+              <div className="flex items-center justify-between border-b border-slate-800 bg-slate-900/90 px-5 py-3.5">
                 <div className="flex items-center gap-2">
-                  <Terminal className="h-4 w-4 text-neon-violet" />
-                  <span className="font-mono text-xs text-fg-muted">interactive-api-console.sh</span>
+                  <Terminal className="h-4 w-4 text-neon-cyan" />
+                  <span className="font-mono text-xs text-slate-400">interactive-api-console.sh</span>
                 </div>
                 {/* Colored dots */}
                 <div className="flex gap-1.5">
                   <span className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/80" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-green-500/80" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-amber-500/80" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80" />
                 </div>
               </div>
 
               {/* Console Screen */}
-              <div className="p-6 font-mono text-xs text-fg-muted overflow-x-auto min-h-[300px] max-h-[420px] bg-bg/40 leading-relaxed">
-                <div>
-                  <span className="text-neon-violet">$</span> curl -i -X {selected.method} &quot;https://shakhawat.dev{selected.url}&quot;
+              <div className="p-6 font-mono text-xs text-slate-300 overflow-x-auto min-h-[320px] max-h-[440px] bg-slate-950 leading-relaxed">
+                <div className="text-slate-200">
+                  <span className="text-neon-cyan font-bold">$</span> curl -i -X {selected.method} &quot;https://shakhawat.dev{selected.url}&quot;
                 </div>
                 
                 {loading && (

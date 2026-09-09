@@ -17,11 +17,11 @@
   --fg-muted: #9a9ab0;
   --fg-dim: #61617a;
 
-  /* Neon accents */
+  /* Neon accents — Water Blue & Ocean Cyan palette */
   --neon-cyan: #00fff2;
-  --neon-violet: #7c3aed;
-  --neon-pink: #ff2be8;
-  --neon-blue: #3b82f6;
+  --neon-violet: #38bdf8; /* Water / Sky Blue */
+  --neon-pink: #0284c7;   /* Deep Ocean Blue */
+  --neon-blue: #0284c7;
 
   --accent: var(--neon-cyan);
   --accent-2: var(--neon-violet);
@@ -36,10 +36,10 @@
   --fg: #0f172a;
   --fg-muted: #1e293b;
   --fg-dim: #475569;
-  --neon-cyan: #2563eb;
-  --neon-violet: #4f46e5;
-  --neon-pink: #d946ef;
-  --neon-blue: #1d4ed8;
+  --neon-cyan: #0284c7;   /* Rich Water Blue */
+  --neon-violet: #0ea5e9; /* Sky Blue */
+  --neon-pink: #38bdf8;
+  --neon-blue: #0369a1;
 }
 
 .theme-hacker {
@@ -153,9 +153,16 @@ body {
 }
 
 .glass {
-  background: rgba(16, 16, 25, 0.55);
-  backdrop-filter: blur(14px);
+  background: rgba(16, 16, 25, 0.75);
+  backdrop-filter: blur(16px);
   border: 1px solid var(--border);
+}
+
+.theme-recruiter .glass {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(203, 213, 225, 0.9);
+  box-shadow: 0 8px 30px -8px rgba(0, 0, 0, 0.08);
 }
 
 .glow-hover {
@@ -215,11 +222,20 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: var(--neon-violet); }
 
 @keyframes marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-33.333%); }
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
 }
 .animate-float { animation: float 6s ease-in-out infinite; }
-.animate-marquee { animation: marquee 25s linear infinite; }
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
 
 /* ---------- Reveal animation base (GSAP toggles) ---------- */
 .reveal {

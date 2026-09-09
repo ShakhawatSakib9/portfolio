@@ -53,48 +53,48 @@ export default function Navbar() {
         scrolled ? "py-4" : "py-6"
       }`}
     >
-      <div className="mx-auto max-w-7xl px-6 lg:px-12">
+      <div className="mx-auto max-w-5xl xl:max-w-6xl px-4 sm:px-6">
         <div
-          className={`flex items-center justify-between px-6 py-3 rounded-full transition-all duration-300 ${
+          className={`flex items-center justify-between px-5 sm:px-7 py-2.5 sm:py-3 rounded-full transition-all duration-300 ${
             scrolled
-              ? "glass border-border-glow shadow-[0_4px_30px_rgba(0,0,0,0.4)]"
+              ? "glass border-border-glow shadow-[0_8px_30px_rgba(0,0,0,0.15)]"
               : "bg-transparent border-transparent"
           } border`}
         >
-          {/* Logo */}
-          <a href="#hero" className="flex items-center gap-2 group">
-            <span className="font-mono text-lg font-bold tracking-wider text-gradient group-hover:text-glow">
-              &lt;MSH /&gt;
-            </span>
-          </a>
+          {/* Left: Logo & Mode Capsule grouped comfortably */}
+          <div className="flex items-center gap-3 sm:gap-5">
+            <a href="#hero" className="flex items-center gap-2 group">
+              <span className="font-mono text-base sm:text-lg font-bold tracking-wider text-gradient group-hover:text-glow">
+                &lt;MSH /&gt;
+              </span>
+            </a>
 
-          {/* Mode Toggle Capsule */}
-          <div className="flex items-center gap-3">
+            {/* Mode Toggle Capsule */}
             <button
               onClick={handleToggle}
               data-cursor-label={mode === "recruiter" ? "[ DEV MODE ]" : "[ RECRUITER MODE ]"}
-              className="relative flex items-center justify-between gap-1 p-1 rounded-full bg-bg border border-border cursor-pointer select-none w-[165px] h-[36px] overflow-hidden"
+              className="relative flex items-center justify-between gap-1 p-0.5 sm:p-1 rounded-full bg-bg border border-border cursor-pointer select-none w-[150px] sm:w-[165px] h-[32px] sm:h-[36px] overflow-hidden"
             >
               {/* Slider highlight */}
               <span
-                className={`absolute top-1 bottom-1 w-[78px] rounded-full transition-all duration-300 ${
+                className={`absolute top-0.5 sm:top-1 bottom-0.5 sm:bottom-1 w-[70px] sm:w-[78px] rounded-full transition-all duration-300 ${
                   mode === "engineer"
-                    ? "left-[82px] bg-neon-violet/10 border border-neon-violet/30 shadow-[0_0_12px_rgba(139,92,246,0.2)]"
-                    : "left-1 bg-neon-cyan/10 border border-neon-cyan/30 shadow-[0_0_12px_rgba(0,255,242,0.2)]"
+                    ? "left-[76px] sm:left-[82px] bg-neon-violet/15 border border-neon-violet/30 shadow-[0_0_12px_rgba(14,165,233,0.2)]"
+                    : "left-0.5 sm:left-1 bg-neon-cyan/15 border border-neon-cyan/30 shadow-[0_0_12px_rgba(0,255,242,0.2)]"
                 }`}
               />
 
               {/* Recruiter button option */}
-              <span className={`relative z-10 w-[78px] text-center font-mono text-[9px] font-bold tracking-wider flex items-center justify-center gap-1 transition-colors ${
-                mode === "recruiter" ? "text-neon-cyan" : "text-fg-dim"
+              <span className={`relative z-10 w-[70px] sm:w-[78px] text-center font-mono text-[9px] font-bold tracking-wider flex items-center justify-center gap-1 transition-colors ${
+                mode === "recruiter" ? "text-neon-cyan font-bold" : "text-fg-dim"
               }`}>
                 <Briefcase className="h-2.5 w-2.5" />
                 HR Mode
               </span>
 
               {/* Dev button option */}
-              <span className={`relative z-10 w-[78px] text-center font-mono text-[9px] font-bold tracking-wider flex items-center justify-center gap-1 transition-colors ${
-                mode === "engineer" ? "text-neon-violet" : "text-fg-dim"
+              <span className={`relative z-10 w-[70px] sm:w-[78px] text-center font-mono text-[9px] font-bold tracking-wider flex items-center justify-center gap-1 transition-colors ${
+                mode === "engineer" ? "text-neon-violet font-bold" : "text-fg-dim"
               }`}>
                 <TerminalIcon className="h-2.5 w-2.5" />
                 Dev Mode
@@ -102,8 +102,8 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          {/* Desktop Navigation — Well-spaced, high contrast & clear */}
+          <nav className="hidden md:flex items-center gap-6 lg:gap-8">
             {NAV_ITEMS.map((item) => {
               const id = item.href.replace("#", "");
               const isActive = activeSection === id;
@@ -111,8 +111,8 @@ export default function Navbar() {
                 <a
                   key={item.label}
                   href={item.href}
-                  className={`relative font-mono text-xs uppercase tracking-widest transition-colors hover:text-neon-cyan ${
-                    isActive ? "text-neon-cyan" : "text-fg-muted"
+                  className={`relative font-mono text-xs uppercase tracking-wider font-semibold transition-colors hover:text-neon-cyan ${
+                    isActive ? "text-neon-cyan font-bold" : "text-fg-muted hover:text-fg"
                   }`}
                 >
                   {item.label}
@@ -129,7 +129,7 @@ export default function Navbar() {
             <Magnetic strength={0.3}>
               <a
                 href="#contact"
-                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-border px-5 py-2 font-mono text-xs uppercase tracking-widest text-fg transition-colors hover:border-neon-cyan hover:text-black"
+                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-border px-5 py-2 font-mono text-xs uppercase tracking-wider font-semibold text-fg transition-colors hover:border-neon-cyan hover:text-black"
               >
                 {/* Hover slide background */}
                 <span className="absolute inset-0 z-0 translate-y-full bg-neon-cyan transition-transform duration-300 ease-out group-hover:translate-y-0" />

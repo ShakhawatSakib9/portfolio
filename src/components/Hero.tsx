@@ -1,12 +1,12 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { ArrowRight, Download } from "lucide-react";
 import { Github, Linkedin, Facebook, Instagram } from "./SocialIcons";
 import Magnetic from "./Magnetic";
-
-const NeonScene = dynamic(() => import("./NeonScene"), { ssr: false });
+import HeroPortrait from "./HeroPortrait";
+import { useMode } from "@/context/ModeContext";
+import { playClick } from "@/utils/audio";
 
 const ROLES = [
   "Full-Stack Developer",
@@ -43,12 +43,9 @@ function useTypingRole() {
   return text;
 }
 
-import { useMode } from "@/context/ModeContext";
-import { playClick } from "@/utils/audio";
-
 const socials = [
   { icon: Github, href: "https://github.com/ShakhawatSakib9", label: "GitHub" },
-  { icon: Linkedin, href: "https://www.linkedin.com/in/md-shakhawat-hossain-0a8ba0352/", label: "LinkedIn" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/md-shakhawathossain-0a8ba0352", label: "LinkedIn" },
   { icon: Facebook, href: "https://www.facebook.com/md.shakhawat.hossain.987218/", label: "Facebook" },
   { icon: Instagram, href: "https://www.instagram.com/shakhawat_sa_kib/?hl=en", label: "Instagram" },
 ];
@@ -72,89 +69,108 @@ export default function Hero({ onUnlockResume }: HeroProps) {
   return (
     <section
       id="hero"
-      className="relative min-h-screen w-full overflow-hidden bg-grid flex items-center"
+      className="relative min-h-screen w-full overflow-hidden bg-grid flex items-center pt-16 sm:pt-20 pb-12"
     >
-      {/* Ambient neon glows */}
-      <div className="pointer-events-none absolute -top-40 -left-40 h-[36rem] w-[36rem] rounded-full bg-[radial-gradient(circle,rgba(124,58,237,0.22),transparent_60%)] blur-2xl" />
+      {/* Ambient neon glows — Water Blue & Cyan */}
+      <div className="pointer-events-none absolute -top-40 -left-40 h-[36rem] w-[36rem] rounded-full bg-[radial-gradient(circle,rgba(14,165,233,0.16),transparent_60%)] blur-2xl" />
       <div className="pointer-events-none absolute -bottom-40 right-0 h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,rgba(0,255,242,0.14),transparent_60%)] blur-2xl" />
 
-      {/* 3D scene */}
-      <div className="absolute inset-0 lg:left-[45%] opacity-90">
-        <NeonScene />
-      </div>
+      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-6 sm:px-10 lg:px-16 2xl:px-20 -mt-6 sm:-mt-10 lg:-mt-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-8 lg:gap-12 2xl:gap-16">
+          {/* Left Column: Bio & Actions */}
+          <div className="lg:col-span-7 flex flex-col justify-center">
+            <div className="inline-flex items-center gap-2 self-start rounded-full border border-border bg-bg-card/60 px-4 py-1.5 font-mono text-xs text-neon-cyan backdrop-blur">
+              <span className="h-2 w-2 rounded-full bg-neon-cyan shadow-[0_0_10px_var(--neon-cyan)] animate-pulse" />
+              Available for work
+            </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 lg:px-12">
-        <div className="max-w-2xl">
-          <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-bg-card/60 px-4 py-1.5 font-mono text-xs text-neon-cyan backdrop-blur">
-            <span className="h-2 w-2 rounded-full bg-neon-cyan shadow-[0_0_10px_var(--neon-cyan)] animate-pulse" />
-            Available for work
-          </p>
+            <h1 className="mt-5 text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.06] tracking-tight">
+              <span className="block text-fg-muted text-xl sm:text-2xl lg:text-3xl font-light mb-1 sm:mb-2">
+                Hi, I&apos;m
+              </span>
+              <span className="text-gradient text-glow">Md. Shakhawat</span>
+              <br />
+              <span className="text-fg">Hossain</span>
+            </h1>
 
-          <h1 className="text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
-            <span className="block text-fg-muted text-2xl font-light mb-2 sm:text-3xl">
-              Hi, I&apos;m
-            </span>
-            <span className="text-gradient text-glow">Md. Shakhawat</span>
-            <br />
-            <span className="text-fg">Hossain</span>
-          </h1>
+            <div className="mt-5 flex h-8 items-center font-mono text-base sm:text-xl text-fg-muted">
+              <span className="text-neon-cyan mr-2">&gt;</span>
+              <span>{role}</span>
+              <span className="ml-1 inline-block h-5 w-[2px] bg-neon-cyan animate-pulse" />
+            </div>
 
-          <div className="mt-6 flex h-8 items-center font-mono text-lg text-fg-muted sm:text-xl">
-            <span className="text-neon-violet mr-2">&gt;</span>
-            <span>{role}</span>
-            <span className="ml-1 inline-block h-5 w-[2px] bg-neon-cyan animate-pulse" />
-          </div>
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-fg-muted sm:text-lg">
+              I build scalable backend systems and REST APIs with Laravel, PHP &amp; MySQL
+              — focused on performance, clean architecture, and reliable production-ready systems.
+            </p>
 
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-fg-muted sm:text-lg">
-            I build fast, scalable backends and clean interfaces with Laravel, PHP
-            &amp; MySQL — turning complex problems into reliable, elegant systems.
-          </p>
-
-          <div className="mt-9 flex flex-wrap items-center gap-4">
-            <Magnetic>
-              <a
-                href="#work"
-                className="group inline-flex items-center gap-2 rounded-full bg-neon-cyan px-7 py-3 font-medium text-black transition-shadow hover:shadow-[0_0_30px_-4px_var(--neon-cyan)]"
-              >
-                View my work
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </a>
-            </Magnetic>
-            <Magnetic>
-              <a
-                href="/resume/Md.-Shakhawat-Hossain-R-L.pdf"
-                onClick={handleResumeClick}
-                data-cursor-label={mode === "engineer" ? "[ UNLOCK VIA BKASH ]" : "[ DOWNLOAD CV ]"}
-                className="inline-flex items-center gap-2 rounded-full border border-border-glow px-7 py-3 font-medium text-fg glow-hover"
-              >
-                <Download className="h-4 w-4" />
-                Resume
-              </a>
-            </Magnetic>
-          </div>
-
-          <div className="mt-10 flex items-center gap-5">
-            {socials.map(({ icon: Icon, href, label }) => (
-              <Magnetic key={label} strength={0.5}>
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Magnetic>
                 <a
-                  href={href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={label}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-fg-muted transition-colors hover:border-neon-cyan hover:text-neon-cyan"
+                  href="#work"
+                  className="group inline-flex items-center gap-2 rounded-full bg-neon-cyan px-7 py-3 font-medium text-black transition-shadow hover:shadow-[0_0_30px_-4px_var(--neon-cyan)]"
                 >
-                  <Icon className="h-5 w-5" />
+                  View my work
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
               </Magnetic>
-            ))}
+              <Magnetic>
+                <a
+                  href="/resume/Md.-Shakhawat-Hossain-R-L.pdf"
+                  onClick={handleResumeClick}
+                  data-cursor-label={mode === "engineer" ? "[ UNLOCK VIA BKASH ]" : "[ DOWNLOAD CV ]"}
+                  className="inline-flex items-center gap-2 rounded-full border border-border-glow px-7 py-3 font-medium text-fg glow-hover"
+                >
+                  <Download className="h-4 w-4" />
+                  Resume
+                </a>
+              </Magnetic>
+            </div>
+
+            <div className="mt-8 flex items-center gap-5">
+              {socials.map(({ icon: Icon, href, label }) => (
+                <Magnetic key={label} strength={0.5}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={label}
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-fg-muted transition-colors hover:border-neon-cyan hover:text-neon-cyan"
+                  >
+                    <Icon className="h-5 w-5" />
+                  </a>
+                </Magnetic>
+              ))}
+            </div>
+
+            {/* Quick Metrics Bar — Fills the lower gap & highlights real credentials */}
+            <div className="mt-10 pt-6 border-t border-border/50 grid grid-cols-3 gap-4 sm:gap-6 max-w-xl">
+              <div>
+                <p className="font-mono text-xl sm:text-2xl font-bold text-fg">1.5+ <span className="text-neon-cyan text-sm font-semibold">Yrs</span></p>
+                <p className="text-[11px] text-fg-muted font-medium mt-0.5">Industry Exp (IISBD)</p>
+              </div>
+              <div>
+                <p className="font-mono text-xl sm:text-2xl font-bold text-fg">5+ <span className="text-neon-cyan text-sm font-semibold">Apps</span></p>
+                <p className="text-[11px] text-fg-muted font-medium mt-0.5">Production Systems</p>
+              </div>
+              <div>
+                <p className="font-mono text-xl sm:text-2xl font-bold text-fg">3.40 <span className="text-neon-cyan text-sm font-semibold">CGPA</span></p>
+                <p className="text-[11px] text-fg-muted font-medium mt-0.5">B.Sc in CSE (DIU)</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Interactive Tech Portrait */}
+          <div className="lg:col-span-5 flex items-center justify-center">
+            <HeroPortrait />
           </div>
         </div>
       </div>
 
       {/* Scroll hint */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-fg-dim">
+      <div className="hidden sm:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-fg-dim">
         <span className="font-mono text-[10px] uppercase tracking-[0.3em]">Scroll</span>
-        <span className="h-10 w-[1px] bg-gradient-to-b from-neon-cyan to-transparent" />
+        <span className="h-8 w-[1px] bg-gradient-to-b from-neon-cyan to-transparent" />
       </div>
     </section>
   );

@@ -92,7 +92,7 @@ const PROJECTS: Project[] = [
   {
     id: "construction-mis",
     title: "Construction Operations & MIS",
-    subtitle: "Enterprise ERP (IISL)",
+    subtitle: "Enterprise ERP (IISBD)",
     confidentialTag: "Enterprise Production System",
     description:
       "A comprehensive construction company management platform handling end-to-end operations including multi-site logistics, bill creations, material requisitions, and real-time comparative statements.",
@@ -274,14 +274,17 @@ export default function Work() {
 
   return (
     <section id="work" className="relative py-24 lg:py-32 overflow-hidden bg-bg">
-      {/* Background ambient glow */}
-      <div className="pointer-events-none absolute top-1/3 right-0 h-[35rem] w-[35rem] rounded-full bg-[radial-gradient(circle,rgba(0,255,242,0.06),transparent_70%)] blur-3xl" />
+      {/* Background ambient water-blue glow */}
+      <div className="pointer-events-none absolute top-1/3 right-0 h-[38rem] w-[38rem] rounded-full bg-[radial-gradient(circle,rgba(14,165,233,0.08),transparent_70%)] blur-3xl" />
+      <div className="pointer-events-none absolute bottom-10 left-10 h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,rgba(6,182,212,0.06),transparent_70%)] blur-3xl" />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
+      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-6 sm:px-10 lg:px-16 2xl:px-20">
         {/* Section Header */}
-        <div className="max-w-2xl reveal">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-neon-cyan">// 03. Selected Work</p>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-fg">
+        <div className="max-w-3xl reveal">
+          <p className="font-mono text-xs uppercase tracking-[0.3em] text-neon-cyan font-semibold">
+            // 03. Selected Work
+          </p>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-fg leading-tight">
             Case Studies: Solving <span className="text-gradient">Real Problems</span>
           </h2>
           <p className="mt-4 text-fg-muted text-base leading-relaxed sm:text-lg">
@@ -290,9 +293,9 @@ export default function Work() {
         </div>
 
         {/* Case Study Interactive Tabs & Showcase */}
-        <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-start">
-          {/* Tab Navigation List (5 cols) */}
-          <div className="lg:col-span-5 space-y-3 reveal">
+        <div className="mt-14 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-start">
+          {/* Tab Navigation List (4 cols) */}
+          <div className="lg:col-span-4 space-y-3.5 reveal">
             {PROJECTS.map((project, idx) => {
               const isActive = activeTab === idx;
               return (
@@ -304,27 +307,29 @@ export default function Work() {
                     setActiveNodeIdx(null);
                   }}
                   data-cursor-label="[ VIEW CASE ]"
-                  className={`w-full text-left p-5 rounded-2xl border transition-all duration-300 relative overflow-hidden ${
+                  className={`w-full text-left p-5 rounded-2xl border transition-all duration-300 relative overflow-hidden group ${
                     isActive
-                      ? "border-neon-cyan/60 bg-bg-card/90 shadow-[0_0_25px_rgba(0,255,242,0.12)]"
-                      : "border-border/60 bg-bg-card/30 hover:border-border hover:bg-bg-card/50"
+                      ? "border-neon-cyan/70 bg-bg-card shadow-[0_0_25px_rgba(14,165,233,0.15)]"
+                      : "border-border bg-bg-card/40 hover:border-border-glow hover:bg-bg-card/70"
                   }`}
                 >
-                  {/* Subtle active left bar indicator */}
+                  {/* Active left bar indicator */}
                   {isActive && (
-                    <span className="absolute left-0 top-0 bottom-0 w-1 bg-neon-cyan shadow-[0_0_10px_var(--neon-cyan)]" />
+                    <span className="absolute left-0 top-0 bottom-0 w-1.5 bg-neon-cyan shadow-[0_0_12px_var(--neon-cyan)]" />
                   )}
 
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-[10px] uppercase tracking-wider text-neon-violet">
+                    <span className={`font-mono text-[11px] uppercase tracking-wider font-semibold transition-colors ${
+                      isActive ? "text-neon-cyan" : "text-fg-dim group-hover:text-neon-cyan"
+                    }`}>
                       {project.subtitle}
                     </span>
-                    <span className="font-mono text-[9px] uppercase tracking-wider text-fg-dim border border-border/80 px-2 py-0.5 rounded">
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-fg-dim border border-border px-2 py-0.5 rounded-md">
                       0{idx + 1}
                     </span>
                   </div>
 
-                  <h3 className={`mt-2 font-semibold text-lg transition-colors ${isActive ? "text-neon-cyan" : "text-fg"}`}>
+                  <h3 className={`mt-2 font-bold text-lg transition-colors ${isActive ? "text-fg" : "text-fg-muted group-hover:text-fg"}`}>
                     {project.title}
                   </h3>
                 </button>
@@ -332,13 +337,13 @@ export default function Work() {
             })}
           </div>
 
-          {/* Detailed Project Card (7 cols) */}
-          <div className="lg:col-span-7 reveal">
-            <TiltCard className="relative overflow-hidden rounded-3xl border border-border/80 bg-bg-card/60 p-8 sm:p-10 backdrop-blur-md shadow-2xl">
+          {/* Detailed Project Card (8 cols) */}
+          <div className="lg:col-span-8 reveal">
+            <TiltCard className="relative overflow-hidden rounded-3xl border border-border bg-bg-card p-7 sm:p-10 backdrop-blur-md shadow-2xl">
               {/* Header Info */}
-              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border/60 pb-6">
+              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border/70 pb-6">
                 <div>
-                  <span className="font-mono text-xs uppercase tracking-widest text-neon-cyan">
+                  <span className="font-mono text-xs uppercase tracking-widest text-neon-cyan font-semibold">
                     // {activeProject.subtitle}
                   </span>
                   <h3 className="mt-2 text-2xl font-bold tracking-tight text-fg sm:text-3xl">
@@ -346,8 +351,8 @@ export default function Work() {
                   </h3>
                 </div>
 
-                <div className="inline-flex items-center gap-2 rounded-full border border-border bg-bg/80 px-3 py-1 text-xs font-mono text-fg-muted">
-                  <Lock className="h-3 w-3 text-neon-violet" />
+                <div className="inline-flex items-center gap-2 rounded-full border border-neon-cyan/30 bg-neon-cyan/10 px-3.5 py-1.5 text-xs font-mono text-neon-cyan font-semibold">
+                  <Lock className="h-3.5 w-3.5 text-neon-cyan" />
                   <span>{activeProject.confidentialTag}</span>
                 </div>
               </div>
@@ -355,7 +360,7 @@ export default function Work() {
               {/* Mode-Dependent View */}
               {mode === "recruiter" ? (
                 /* RECRUITER MODE: Clean, impact-focused display */
-                <div className="space-y-8 mt-6">
+                <div className="space-y-8 mt-7">
                   <div>
                     <p className="text-fg-muted leading-relaxed text-sm sm:text-base">
                       {activeProject.description}
@@ -363,21 +368,23 @@ export default function Work() {
                   </div>
 
                   {/* Challenge & Solution Grid */}
-                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                    <div className="rounded-2xl border border-border/80 bg-bg-soft p-5">
-                      <span className="font-mono text-[11px] uppercase tracking-wider text-red-500 font-semibold block mb-2">
+                  <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                    <div className="rounded-2xl border border-red-500/25 bg-red-500/5 p-5">
+                      <span className="font-mono text-xs uppercase tracking-wider text-red-500 font-bold flex items-center gap-2 mb-2.5">
+                        <span className="h-2 w-2 rounded-full bg-red-500 animate-pulse" />
                         [ The Challenge ]
                       </span>
-                      <p className="text-xs text-fg-muted leading-relaxed">
+                      <p className="text-sm text-fg-muted leading-relaxed">
                         {activeProject.challenge}
                       </p>
                     </div>
 
-                    <div className="rounded-2xl border border-neon-cyan/30 bg-neon-cyan/5 p-5">
-                      <span className="font-mono text-[11px] uppercase tracking-wider text-neon-cyan font-semibold block mb-2">
+                    <div className="rounded-2xl border border-neon-cyan/40 bg-neon-cyan/5 p-5">
+                      <span className="font-mono text-xs uppercase tracking-wider text-neon-cyan font-bold flex items-center gap-2 mb-2.5">
+                        <span className="h-2 w-2 rounded-full bg-neon-cyan" />
                         [ The Architecture Solution ]
                       </span>
-                      <p className="text-xs text-fg-muted leading-relaxed">
+                      <p className="text-sm text-fg leading-relaxed">
                         {activeProject.solution}
                       </p>
                     </div>
@@ -385,22 +392,22 @@ export default function Work() {
 
                   {/* Performance Metrics */}
                   <div>
-                    <p className="font-mono text-[11px] uppercase tracking-wider text-fg-dim mb-3">
+                    <p className="font-mono text-[11px] uppercase tracking-wider text-fg-dim mb-3 font-semibold">
                       Key Metrics &amp; Impact
                     </p>
-                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                    <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-3">
                       {activeProject.metrics.map(({ label, value, icon: Icon }) => (
                         <div
                           key={label}
-                          className="rounded-xl border border-border/80 bg-bg-soft p-3.5 backdrop-blur-sm"
+                          className="rounded-xl border border-border bg-bg-soft/90 p-4 backdrop-blur-sm transition-all hover:border-neon-cyan/40"
                         >
-                          <div className="flex items-center gap-2 text-neon-violet">
-                            <Icon className="h-3.5 w-3.5" />
-                            <span className="font-mono text-[10px] uppercase tracking-wider text-fg-dim">
+                          <div className="flex items-center gap-2 text-neon-cyan">
+                            <Icon className="h-4 w-4" />
+                            <span className="font-mono text-[10px] uppercase tracking-wider text-fg-dim font-medium">
                               {label}
                             </span>
                           </div>
-                          <div className="mt-1.5 font-mono text-sm font-bold text-fg">
+                          <div className="mt-2 font-mono text-sm font-bold text-fg">
                             {value}
                           </div>
                         </div>
@@ -413,7 +420,7 @@ export default function Work() {
                 <div className="space-y-8 mt-6">
                   {/* Interactive Architecture Flow Diagram */}
                   <div>
-                    <span className="font-mono text-[11px] uppercase text-neon-violet tracking-wider block mb-3">
+                    <span className="font-mono text-[11px] uppercase text-neon-cyan tracking-wider block mb-3 font-semibold">
                       // 1. Live Architecture Explorer (Click Nodes)
                     </span>
                     <div className="grid grid-cols-2 md:flex md:flex-wrap items-center gap-4 p-5 rounded-2xl bg-bg-soft border border-border/80">
@@ -448,7 +455,7 @@ export default function Work() {
                                   y1="2"
                                   x2="100%"
                                   y2="2"
-                                  stroke={activeNodeIdx === index ? "var(--neon-cyan)" : "var(--neon-violet)"}
+                                  stroke={activeNodeIdx === index ? "var(--neon-cyan)" : "var(--neon-cyan)"}
                                   strokeWidth="2"
                                   strokeDasharray="6 6"
                                   className="animate-flow-dash"
@@ -489,7 +496,7 @@ export default function Work() {
 
                   {/* 1.1 Trace a Request Observability */}
                   <div>
-                    <span className="font-mono text-[11px] uppercase text-neon-violet tracking-wider block mb-3">
+                    <span className="font-mono text-[11px] uppercase text-neon-cyan tracking-wider block mb-3 font-semibold">
                       // 1.1 Live Distributed Request Tracer
                     </span>
                     <TraceSimulator />
@@ -497,7 +504,7 @@ export default function Work() {
 
                   {/* Before vs After Performance observatory */}
                   <div>
-                    <span className="font-mono text-[11px] uppercase text-neon-cyan tracking-wider block mb-3">
+                    <span className="font-mono text-[11px] uppercase text-neon-cyan tracking-wider block mb-3 font-semibold">
                       // 2. Before ➔ After Performance Observatory
                     </span>
                     <div className="overflow-x-auto rounded-2xl border border-border/80 bg-bg-soft">
@@ -531,7 +538,7 @@ export default function Work() {
 
                   {/* Decision Logs */}
                   <div>
-                    <span className="font-mono text-[11px] uppercase text-neon-violet tracking-wider block mb-3">
+                    <span className="font-mono text-[11px] uppercase text-neon-cyan tracking-wider block mb-3 font-semibold">
                       // 3. Engineering Decisions & Architecture Trade-offs
                     </span>
                     <div className="space-y-4">
@@ -539,7 +546,7 @@ export default function Work() {
                         <div key={dec.title} className="p-5 rounded-xl border border-border/80 bg-bg/30 font-mono space-y-2">
                           <div className="flex items-center justify-between gap-4">
                             <h4 className="text-xs font-bold text-fg flex items-center gap-1.5">
-                              <span className="h-1.5 w-1.5 rounded-full bg-neon-violet" />
+                              <span className="h-1.5 w-1.5 rounded-full bg-neon-cyan" />
                               {dec.title}
                             </h4>
                             <span className="text-[9px] text-neon-cyan border border-neon-cyan/20 px-2 py-0.5 rounded">

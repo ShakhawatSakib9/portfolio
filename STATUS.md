@@ -48,7 +48,7 @@ Plus hidden **easter eggs**: Hacker Mode (`sudo su`), God Mode (Konami code), Gl
 - [x] Old HTML site backed up in `legacy/`
 
 ### 🧩 Core Sections — 100%
-- [x] **Hero** — 3D neon orb (gyroscope wireframe + sparkles), typing roles, magnetic CTAs
+- [x] **Hero** — Interactive 3D tilt tech portrait (background-less cutout, dual photo switcher, cyber rings & aura, glassmorphic badges), typing roles, magnetic CTAs
 - [x] **Navbar** — sticky, scroll-spy, mode toggle, mobile menu
 - [x] **Marquee** — scrolling tech strip
 - [x] **About** — bio, profile, 4 stat cards
