@@ -36,7 +36,7 @@ export default function About() {
       {/* Background ambient water-blue glow */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[42rem] w-[42rem] rounded-full bg-[radial-gradient(circle,rgba(14,165,233,0.09),transparent_70%)] blur-3xl" />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-6 sm:px-10 lg:px-16 2xl:px-20">
+      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-4 sm:px-10 lg:px-16 2xl:px-20">
         <div className="grid grid-cols-1 gap-12 lg:gap-16 2xl:gap-20 lg:grid-cols-12 lg:items-center">
           
           {/* Profile Image Column (5 cols) */}
@@ -124,18 +124,18 @@ export default function About() {
               </div>
 
               {/* Quick Info Meta Badges below Card */}
-              <div className="mt-4 grid grid-cols-3 gap-2 w-full">
-                <div className="flex items-center justify-center gap-1.5 p-2 rounded-xl border border-border/80 bg-bg-card/60 backdrop-blur-sm text-center">
+              <div className="mt-4 grid grid-cols-3 gap-1.5 sm:gap-2 w-full">
+                <div className="flex items-center justify-center gap-1 sm:gap-1.5 p-1.5 sm:p-2 rounded-xl border border-border/80 bg-bg-card/60 backdrop-blur-sm text-center">
                   <Building2 className="h-3.5 w-3.5 text-neon-cyan shrink-0" />
-                  <span className="font-mono text-[11px] text-fg font-medium truncate">IISBD</span>
+                  <span className="font-mono text-[10px] sm:text-[11px] text-fg font-medium truncate">IISBD</span>
                 </div>
-                <div className="flex items-center justify-center gap-1.5 p-2 rounded-xl border border-border/80 bg-bg-card/60 backdrop-blur-sm text-center">
+                <div className="flex items-center justify-center gap-1 sm:gap-1.5 p-1.5 sm:p-2 rounded-xl border border-border/80 bg-bg-card/60 backdrop-blur-sm text-center">
                   <GraduationCap className="h-3.5 w-3.5 text-neon-cyan shrink-0" />
-                  <span className="font-mono text-[11px] text-fg font-medium truncate">DIU 3.40</span>
+                  <span className="font-mono text-[10px] sm:text-[11px] text-fg font-medium truncate">DIU 3.40</span>
                 </div>
-                <div className="flex items-center justify-center gap-1.5 p-2 rounded-xl border border-border/80 bg-bg-card/60 backdrop-blur-sm text-center">
+                <div className="flex items-center justify-center gap-1 sm:gap-1.5 p-1.5 sm:p-2 rounded-xl border border-border/80 bg-bg-card/60 backdrop-blur-sm text-center">
                   <MapPin className="h-3.5 w-3.5 text-neon-cyan shrink-0" />
-                  <span className="font-mono text-[11px] text-fg font-medium truncate">Dhaka, BD</span>
+                  <span className="font-mono text-[10px] sm:text-[11px] text-fg font-medium truncate">Dhaka, BD</span>
                 </div>
               </div>
 
@@ -160,8 +160,9 @@ export default function About() {
             <div className="mt-6 space-y-4 text-fg-muted text-base leading-relaxed sm:text-lg">
               <p>
                 I am a professional Full-Stack Web Developer (Laravel-focused) currently engineering production-level web applications at{" "}
-                <strong className="text-fg font-semibold">Innovation and Information System Limited (IISBD)</strong> in Dhaka, Bangladesh. With a B.Sc. in Computer Science &amp; Engineering from{" "}
-                <strong className="text-fg font-semibold">Daffodil International University (CGPA 3.40)</strong>, I combine solid computer science fundamentals with hands-on enterprise software craftsmanship.
+                <strong className="text-fg font-semibold">Innovation and Information System Limited (IISBD)</strong> in Dhaka, Bangladesh. Holding a B.Sc. in CSE from{" "}
+                <strong className="text-fg font-semibold">Daffodil International University (CGPA 3.40)</strong> and currently pursuing a Master&apos;s in CSE at{" "}
+                <strong className="text-fg font-semibold">Jahangirnagar University (JU)</strong>, I combine solid computer science fundamentals with hands-on enterprise software craftsmanship.
               </p>
               <p>
                 My core strength lies in building robust backends with <strong className="text-fg font-medium">Laravel &amp; PHP (OOP)</strong>, architecting relational schemas in <strong className="text-fg font-medium">MySQL</strong>, optimizing complex queries, and engineering secure <strong className="text-fg font-medium">RESTful APIs</strong>. Having delivered mission-critical systems across <span className="text-fg">Construction MIS, E-Learning (LMS), Restaurant POS, and E-Commerce</span>, I focus on clean code, role-based access security, and reliable performance.

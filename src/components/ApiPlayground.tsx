@@ -9,19 +9,22 @@ const ENDPOINTS = [
     id: "status",
     method: "GET",
     url: "/api/v1/status",
+    badge: "Health & Telemetry",
     description: "Fetches system status, runtime memory usage, and execution latency.",
   },
   {
     id: "metrics",
     method: "GET",
     url: "/api/v1/metrics",
+    badge: "Database Observability",
     description: "Queries active connections, average query times, and database optimization stats.",
   },
   {
     id: "bkash-payment",
     method: "POST",
     url: "/api/v1/payment/bkash-verify",
-    description: "Executes tokenized bKash payment verification agreement and webhook response.",
+    badge: "Sandbox Webhook Demo",
+    description: "Simulates tokenized webhook verification, HMAC signature check & idempotent JSON response in a safe demo sandbox.",
   },
 ];
 
@@ -62,7 +65,7 @@ export default function ApiPlayground() {
       {/* Accent ambient glow */}
       <div className="pointer-events-none absolute top-1/2 left-0 h-[36rem] w-[36rem] -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(14,165,233,0.06),transparent_60%)] blur-3xl" />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-6 sm:px-10 lg:px-16 2xl:px-20">
+      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-4 sm:px-10 lg:px-16 2xl:px-20">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-center">
           
           {/* Text panel (5 cols) */}
@@ -100,9 +103,14 @@ export default function ApiPlayground() {
                       {ep.method}
                     </span>
                     <div>
-                      <span className="block font-mono text-xs font-bold text-fg">
-                        {ep.url}
-                      </span>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="font-mono text-xs font-bold text-fg">
+                          {ep.url}
+                        </span>
+                        <span className="font-mono text-[10px] text-neon-cyan bg-neon-cyan/10 px-2 py-0.5 rounded border border-neon-cyan/25 font-medium">
+                          {ep.badge}
+                        </span>
+                      </div>
                       <span className="block text-xs text-fg-muted mt-1 leading-relaxed">
                         {ep.description}
                       </span>
@@ -154,7 +162,7 @@ export default function ApiPlayground() {
               </div>
 
               {/* Console Screen */}
-              <div className="p-6 font-mono text-xs text-slate-300 overflow-x-auto min-h-[320px] max-h-[440px] bg-slate-950 leading-relaxed">
+              <div className="p-4 sm:p-6 font-mono text-[11px] sm:text-xs text-slate-300 overflow-x-auto min-h-[300px] sm:min-h-[320px] max-h-[440px] bg-slate-950 leading-relaxed">
                 <div className="text-slate-200">
                   <span className="text-neon-cyan font-bold">$</span> curl -i -X {selected.method} &quot;https://shakhawat.dev{selected.url}&quot;
                 </div>
@@ -166,18 +174,18 @@ export default function ApiPlayground() {
                 )}
 
                 {httpStatus && (
-                  <div className="mt-4 text-fg space-y-1">
-                    <div className="text-green-400">
+                  <div className="mt-4 text-slate-200 space-y-1">
+                    <div className="text-emerald-400 font-bold">
                       HTTP/1.1 {httpStatus} OK
                     </div>
-                    <div className="text-fg-dim">
+                    <div className="text-slate-400">
                       Date: {new Date().toUTCString()}
                     </div>
-                    <div className="text-fg-dim">
+                    <div className="text-slate-400">
                       Content-Type: application/json; charset=utf-8
                     </div>
                     {latency && (
-                      <div className="text-neon-cyan">
+                      <div className="text-neon-cyan font-bold">
                         X-Response-Time: {latency}ms
                       </div>
                     )}
@@ -185,14 +193,14 @@ export default function ApiPlayground() {
                 )}
 
                 {response && (
-                  <pre className="mt-6 text-green-300 font-mono text-xs overflow-x-auto">
+                  <pre className="mt-6 text-emerald-300 font-mono text-xs overflow-x-auto leading-relaxed">
                     {JSON.stringify(response, null, 2)}
                   </pre>
                 )}
 
                 {!loading && !response && (
-                  <div className="mt-12 text-center text-fg-dim">
-                    <Activity className="h-8 w-8 mx-auto text-border-glow animate-pulse" />
+                  <div className="mt-12 text-center text-slate-400">
+                    <Activity className="h-8 w-8 mx-auto text-sky-400/50 animate-pulse" />
                     <p className="mt-3">Console idle. Hit the &quot;Send Request&quot; button to see response payload.</p>
                   </div>
                 )}

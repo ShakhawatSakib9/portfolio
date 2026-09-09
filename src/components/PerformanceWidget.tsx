@@ -29,7 +29,7 @@ export default function PerformanceWidget() {
 
   return (
     <div
-      className="fixed bottom-6 left-6 z-40 group cursor-default select-none"
+      className="hidden md:block fixed bottom-6 left-6 z-40 group cursor-default select-none"
       title="System Page Speed & Core Web Vitals Audit"
     >
       {/* Small floating pill */}

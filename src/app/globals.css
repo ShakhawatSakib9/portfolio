@@ -33,13 +33,22 @@
   --bg-card: #ffffff;
   --border: #cbd5e1;
   --border-glow: #94a3b8;
-  --fg: #0f172a;
+  --fg: #090d16;
   --fg-muted: #1e293b;
-  --fg-dim: #475569;
-  --neon-cyan: #0284c7;   /* Rich Water Blue */
-  --neon-violet: #0ea5e9; /* Sky Blue */
-  --neon-pink: #38bdf8;
-  --neon-blue: #0369a1;
+  --fg-dim: #334155;
+  --neon-cyan: #0284c7;   /* Rich High-Contrast Water Blue */
+  --neon-violet: #0369a1; /* Deep Oceanic Blue */
+  --neon-pink: #0ea5e9;
+  --neon-blue: #0284c7;
+}
+
+.theme-recruiter .text-glow {
+  text-shadow: none;
+}
+
+.theme-recruiter ::selection {
+  background: rgba(2, 132, 199, 0.2);
+  color: #090d16;
 }
 
 .theme-hacker {
@@ -105,35 +114,6 @@ body {
   background-size: 60px 60px;
 }
 
-.bg-noise::before {
-  content: "";
-  position: fixed;
-  top: -50%;
-  left: -50%;
-  right: -50%;
-  bottom: -50%;
-  width: 200%;
-  height: 200%;
-  z-index: 2;
-  pointer-events: none;
-  opacity: 0.045;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation: noise-anim 0.3s steps(3) infinite;
-}
-
-@keyframes noise-anim {
-  0% { transform: translate(0, 0); }
-  10% { transform: translate(-0.5%, -1%); }
-  20% { transform: translate(-1%, 0.5%); }
-  30% { transform: translate(0.5%, -1%); }
-  40% { transform: translate(-0.5%, 1.5%); }
-  50% { transform: translate(-0.5%, 0.5%); }
-  60% { transform: translate(1.5%, -0.5%); }
-  70% { transform: translate(1%, 0.5%); }
-  80% { transform: translate(-1.5%, -1%); }
-  90% { transform: translate(0.5%, 1%); }
-  100% { transform: translate(0, 0); }
-}
 
 /* ---------- Neon text + utilities ---------- */
 .text-gradient {

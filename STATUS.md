@@ -1,63 +1,56 @@
 # 🚀 Portfolio Project — Status & Roadmap
 
-> **Md. Shakhawat Hossain** — Full-Stack Developer Portfolio
-> Stack: **Next.js 16 · React 19 · Tailwind v4 · GSAP · Lenis · Three.js**
-> Last updated: 2026-07-05
+> **Md. Shakhawat Hossain** — Full-Stack Laravel Specialist Portfolio
+> Stack: **Next.js 16 (Turbopack) · React 19 · Tailwind CSS · GSAP · Lenis**
+> Last updated: September 2026
 
 ---
 
-## 📊 Overall Progress: **~88% complete**
+## 📊 Overall Progress: **~96% complete**
 
 ```
 Foundation & Design    ██████████ 100%
 Core Sections          ██████████ 100%
-Signature Features      █████████░  95%
-Interactions / Motion  ██████████ 100%
-Real Backend Data       ████░░░░░░  40%   ← mostly simulated (intentional)
-Polish & Cleanup        ██████░░░░  60%
-SEO / A11y              █████░░░░░  50%
-Deployment              ░░░░░░░░░░   0%   ← not deployed yet
+Senior Engineering Labs██████████ 100%
+Interactions & UX      ██████████ 100%
+Clean Architecture     ██████████ 100%
+Polish & Anti-Gimmick  ██████████ 100%
+Type Safety & Build    ██████████ 100%
+Deployment Ready       █████████░  90%
 ```
 
-**Health:** ✅ Production build passes clean (TypeScript OK, 0 errors) · 4,600+ lines · 30+ components · 4 API routes.
+**Health:** ✅ Production build passes clean with Turbopack (`next build` 9.2s, 0 errors) · 4 API routes.
 
 ---
 
-## 🎯 The Concept (ki banachi)
+## 🎯 The Concept
 
-Ekta **dual-persona interactive portfolio** — visitor 2-ta mode e experience pay:
+A **dual-perspective portfolio** tailored for both non-technical recruiters and senior technical leads/CTOs:
 
-| Mode | Ke jonno | Ki dekhay |
-|------|----------|-----------|
-| 👔 **Recruiter (HR)** | Non-technical, HR | Clean summary, quick wins, easy to scan |
-| 🧑‍💻 **Engineer (Dev)** | Technical reviewers | Deep architecture, tracers, decision logs, incident sim |
-
-Plus hidden **easter eggs**: Hacker Mode (`sudo su`), God Mode (Konami code), Glitch overlay (rapid clicks), Command Palette (Ctrl+K).
+| Perspective | Target Audience | Primary Focus |
+|-------------|-----------------|---------------|
+| 👔 **HR Mode** (Default) | Hiring Managers & Recruiters | Clean summary, credential verification, business impact (Problem ➔ Decision ➔ Implementation ➔ Result), direct CV download |
+| 🧑‍💻 **Dev Mode** | Senior Engineers, Tech Leads & CTOs | In-depth request lifecycle, Code Quality (Fat Controller vs Service Class), Database Lab (N+1 query tuning), Testing & RBAC security |
 
 ---
 
-## ✅ DONE — ki ki kaj hoye geche
+## ✅ Recent High-Impact Additions
 
-### 🏗️ Foundation & Design System — 100%
-- [x] Next.js 16 + React 19 + Tailwind v4 scaffold
-- [x] Neon dark design system (cyan + violet, glow, grid, noise)
-- [x] Custom fonts (Space Grotesk + JetBrains Mono)
-- [x] Lenis smooth scroll
-- [x] Custom neon cursor (dot + easing ring + labels + sound)
-- [x] Magnetic buttons
-- [x] Old HTML site backed up in `legacy/`
+1. **Engineering Principles & Workflow (`EngineeringPrinciples.tsx`):**
+   - 6 Core Principles: Separation of Concerns, Database-First Thinking, API Contract Stability, Secure by Default, ACID Transaction Safety, Measure Before Optimizing.
+   - 8-Step Engineering Workflow Pipeline (`Understand` ➔ `Deploy & Monitor`).
+   - Continuous Evolution: Docker, Redis distributed queues, event-driven Laravel, and CI/CD pipelines.
 
-### 🧩 Core Sections — 100%
-- [x] **Hero** — Interactive 3D tilt tech portrait (background-less cutout, dual photo switcher, cyber rings & aura, glassmorphic badges), typing roles, magnetic CTAs
-- [x] **Navbar** — sticky, scroll-spy, mode toggle, mobile menu
-- [x] **Marquee** — scrolling tech strip
-- [x] **About** — bio, profile, 4 stat cards
-- [x] **Skills** — 8 cards with mouse-spotlight hover
-- [x] **Work** ⭐ — 4 real case studies (Construction MIS, Eduvess LMS, InnoLearn, Restaurant POS) with recruiter/engineer dual view
-- [x] **Contact** — real form → Web3Forms inbox
-- [x] **Preloader** — boot-sequence animation
+2. **Selected Work Overhaul (`Work.tsx`):**
+   - 4 Real CV Projects: Construction MIS (Enterprise ERP @ IISBD), Restaurant POS & Recipe Engine, Eduvess LMS, E-Commerce Management System.
+   - HR Mode: 4 structured cards per project (`[ 01. The Problem ]`, `[ 02. Engineering Decision ]`, `[ 03. Implementation ]`, `[ 04. Business Result ]`).
+   - Dev Mode: 4 compact sub-tabs (~550px height) with real code comparisons, MySQL query diffs, and `php artisan test` verification.
 
-### 🎭 Signature / "Wow" Features — 95%
+3. **Gimmick Removal & Professional Polish:**
+   - Removed film-grain turbulence jitter for a 100% eye-friendly, smooth backdrop.
+   - Direct CV download in both modes (no fake payment lock blocking recruiters).
+   - Prominent Sandbox Demo label on API Playground endpoints.
+   - Consistent water-blue (`#0ea5e9`), sky-blue (`#38bdf8`), and ocean-cyan (`#06b6d4`) branding.
 - [x] **ApiPlayground** — visitor real API hit korte pare (GET/POST, live latency)
 - [x] **IncidentSimulator** — "debug the production incident" quiz (3 real incidents)
 - [x] **ArchitectureMatrix** — monolith vs micro trade-off explorer

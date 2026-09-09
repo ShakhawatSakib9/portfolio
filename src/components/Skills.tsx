@@ -95,7 +95,7 @@ export default function Skills() {
       <div className="pointer-events-none absolute -bottom-40 left-1/4 h-[32rem] w-[32rem] rounded-full bg-[radial-gradient(circle,rgba(6,182,212,0.08),transparent_60%)] blur-3xl" />
 
       {/* Synchronized container width with Hero and About */}
-      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-6 sm:px-10 lg:px-16 2xl:px-20">
+      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-4 sm:px-10 lg:px-16 2xl:px-20">
         
         {/* Section Header */}
         <div className="max-w-3xl reveal">
@@ -186,7 +186,7 @@ export default function Skills() {
                     {skill.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="font-mono text-[10px] px-2 py-0.5 rounded-md bg-bg/80 border border-border/70 text-fg-dim font-medium transition-colors group-hover:border-border-glow group-hover:text-fg"
+                        className="font-mono text-[10px] px-2 py-0.5 rounded-md bg-bg border border-border text-fg-muted font-medium transition-colors group-hover:border-border-glow group-hover:text-fg"
                       >
                         {tag}
                       </span>

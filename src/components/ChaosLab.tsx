@@ -97,7 +97,7 @@ export default function ChaosLab() {
         </p>
 
         {/* Live Services Grid */}
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
           {targets.map((node) => {
             const isCrashed = isRunning && crashedNode === node && activeStep < 3;
             return (
@@ -145,9 +145,9 @@ export default function ChaosLab() {
         {/* Real-time telemetry log output */}
         <div className="rounded-xl bg-[#090b11] p-4 border border-border/60 min-h-[160px] max-h-[220px] overflow-y-auto space-y-1.5">
           {logs.length === 0 && (
-            <div className="flex flex-col items-center justify-center text-center text-fg-dim py-12 space-y-2">
+            <div className="flex flex-col items-center justify-center text-center text-slate-400 py-12 space-y-2">
               <Terminal className="h-6 w-6 text-neon-cyan animate-pulse" />
-              <p className="text-[9px] uppercase tracking-widest">Awaiting Chaos Fault Injection...</p>
+              <p className="text-[9px] uppercase tracking-widest text-slate-400">Awaiting Chaos Fault Injection...</p>
             </div>
           )}
           {logs.map((log, i) => (

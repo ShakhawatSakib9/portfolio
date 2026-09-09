@@ -61,7 +61,7 @@ export default function InterfacePreferences() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-[999]">
+    <div className="hidden sm:block fixed bottom-6 right-6 z-[999]">
       {/* Settings toggle pill */}
       <button
         onClick={() => {

@@ -45,7 +45,7 @@ export default function HeroPortrait() {
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={handleMouseLeave}
-        className="relative w-full max-w-[500px] sm:max-w-[560px] 2xl:max-w-[620px] h-[520px] sm:h-[600px] 2xl:h-[660px] flex items-center justify-center transition-transform duration-300 ease-out cursor-pointer"
+        className="relative w-full max-w-[440px] sm:max-w-[560px] 2xl:max-w-[620px] h-[440px] sm:h-[600px] 2xl:h-[660px] flex items-center justify-center transition-transform duration-300 ease-out cursor-pointer"
         style={{
           perspective: "1200px",
         }}
@@ -66,16 +66,16 @@ export default function HeroPortrait() {
             style={{ transform: "translateZ(-30px)" }}
           >
             {/* Glowing radial core */}
-            <div className="h-[320px] w-[320px] sm:h-[420px] sm:w-[420px] rounded-full bg-gradient-to-tr from-neon-violet/30 via-neon-cyan/20 to-transparent blur-3xl animate-pulse" />
+            <div className="h-[320px] w-[320px] sm:h-[420px] sm:w-[420px] rounded-full bg-gradient-to-tr from-sky-500/25 via-neon-cyan/20 to-transparent blur-3xl animate-pulse" />
             
             {/* Outer concentric cyber ring */}
             <div className="absolute h-[380px] w-[380px] sm:h-[480px] sm:w-[480px] rounded-full border border-neon-cyan/20 border-dashed animate-[spin_45s_linear_infinite]" />
             
             {/* Inner dotted cyber ring */}
-            <div className="absolute h-[300px] w-[300px] sm:h-[400px] sm:w-[400px] rounded-full border border-neon-violet/20 border-dotted animate-[spin_30s_linear_infinite_reverse]" />
+            <div className="absolute h-[300px] w-[300px] sm:h-[400px] sm:w-[400px] rounded-full border border-sky-400/20 border-dotted animate-[spin_30s_linear_infinite_reverse]" />
 
             {/* Glowing background aperture behind head */}
-            <div className="absolute top-10 h-60 w-60 sm:h-72 sm:w-72 rounded-full bg-gradient-to-b from-neon-cyan/15 via-neon-violet/10 to-transparent blur-2xl" />
+            <div className="absolute top-10 h-60 w-60 sm:h-72 sm:w-72 rounded-full bg-gradient-to-b from-neon-cyan/15 via-sky-500/10 to-transparent blur-2xl" />
           </div>
 
           {/* 2. Engineer Mode HUD Elements (Floating around the stage) */}
@@ -88,7 +88,7 @@ export default function HeroPortrait() {
               <span className="absolute top-4 left-6 font-mono text-[10px] text-neon-cyan/80">
                 ┌─ [SYS.CORE] ─┐
               </span>
-              <span className="absolute top-4 right-6 font-mono text-[10px] text-neon-violet/80">
+              <span className="absolute top-4 right-6 font-mono text-[10px] text-sky-400/80">
                 ┌─ [STATUS: 200 OK] ─┐
               </span>
               <span className="absolute bottom-8 left-6 font-mono text-[9px] text-fg-dim">
@@ -126,17 +126,17 @@ export default function HeroPortrait() {
 
           {/* Badge 1: Top-Right - Tech Specialty (Floats beside head) */}
           <div
-            className="absolute top-14 -right-2 sm:-right-6 z-30 flex items-center gap-2.5 rounded-2xl border border-neon-cyan/35 bg-slate-950/90 p-2.5 sm:p-3 shadow-[0_15px_30px_rgba(0,0,0,0.5)] backdrop-blur-md transition-transform duration-300"
+            className="absolute top-8 right-1 sm:top-14 sm:-right-6 z-30 flex items-center gap-2 sm:gap-2.5 rounded-2xl border border-neon-cyan/35 bg-slate-950/90 p-2 sm:p-3 shadow-[0_15px_30px_rgba(0,0,0,0.5)] backdrop-blur-md transition-transform duration-300"
             style={{ transform: "translateZ(50px)" }}
           >
-            <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-neon-cyan/15 text-neon-cyan border border-neon-cyan/40">
-              <Code2 className="h-4 w-4 sm:h-5 sm:w-5" />
+            <div className="flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-neon-cyan/15 text-neon-cyan border border-neon-cyan/40">
+              <Code2 className="h-3.5 w-3.5 sm:h-5 sm:w-5" />
             </div>
             <div>
-              <p className="font-mono text-xs font-bold text-white leading-tight">
+              <p className="font-mono text-[11px] sm:text-xs font-bold text-white leading-tight">
                 Laravel Specialist
               </p>
-              <p className="font-mono text-[10px] text-neon-cyan font-medium">
+              <p className="font-mono text-[9px] sm:text-[10px] text-neon-cyan font-medium">
                 Backend Architecture
               </p>
             </div>
@@ -144,17 +144,17 @@ export default function HeroPortrait() {
 
           {/* Badge 2: Bottom-Left - Real Experience & Company (Floats beside waist) */}
           <div
-            className="absolute bottom-16 -left-2 sm:-left-6 z-30 flex items-center gap-2.5 rounded-2xl border border-neon-violet/35 bg-slate-950/90 p-2.5 sm:p-3 shadow-[0_15px_30px_rgba(0,0,0,0.5)] backdrop-blur-md transition-transform duration-300"
+            className="absolute bottom-10 left-1 sm:bottom-16 sm:-left-6 z-30 flex items-center gap-2 sm:gap-2.5 rounded-2xl border border-sky-500/35 bg-slate-950/90 p-2 sm:p-3 shadow-[0_15px_30px_rgba(0,0,0,0.5)] backdrop-blur-md transition-transform duration-300"
             style={{ transform: "translateZ(45px)" }}
           >
-            <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-neon-violet/20 text-neon-violet border border-neon-violet/40">
-              <ShieldCheck className="h-4 w-4 sm:h-5 sm:w-5" />
+            <div className="flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-xl bg-sky-500/15 text-sky-400 border border-sky-400/30">
+              <ShieldCheck className="h-3.5 w-3.5 sm:h-5 sm:w-5" />
             </div>
             <div>
-              <p className="font-mono text-xs font-bold text-white leading-tight">
+              <p className="font-mono text-[11px] sm:text-xs font-bold text-white leading-tight">
                 1.5+ Yrs Exp.
               </p>
-              <p className="font-mono text-[10px] text-zinc-300">
+              <p className="font-mono text-[9px] sm:text-[10px] text-zinc-300">
                 Software Dev @ IISBD
               </p>
             </div>
@@ -182,11 +182,11 @@ export default function HeroPortrait() {
           onClick={() => setActivePhoto("halfbody")}
           className={`px-3 py-1 rounded-full font-mono text-xs transition-all flex items-center gap-1.5 ${
             activePhoto === "halfbody"
-              ? "bg-neon-violet/20 border border-neon-violet text-neon-violet font-semibold shadow-[0_0_12px_rgba(14,165,233,0.3)]"
+              ? "bg-sky-500/20 border border-sky-400 text-sky-400 font-semibold shadow-[0_0_12px_rgba(14,165,233,0.3)]"
               : "text-fg-muted hover:text-fg border border-border/50 bg-bg-card/40"
           }`}
         >
-          <span className={`h-1.5 w-1.5 rounded-full ${activePhoto === "halfbody" ? "bg-neon-violet" : "bg-fg-dim"}`} />
+          <span className={`h-1.5 w-1.5 rounded-full ${activePhoto === "halfbody" ? "bg-sky-400" : "bg-fg-dim"}`} />
           Half-Body View
         </button>
       </div>

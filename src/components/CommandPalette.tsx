@@ -223,7 +223,7 @@ export default function CommandPalette() {
           playChime();
         }}
         data-cursor-label="[ CLI TERMINAL ]"
-        className="fixed bottom-6 right-24 z-50 flex h-12 w-12 items-center justify-center rounded-full border border-neon-cyan/40 bg-bg/80 text-neon-cyan shadow-[0_0_15px_rgba(0,255,242,0.2)] transition-all hover:scale-110 hover:border-neon-cyan hover:shadow-[0_0_25px_var(--neon-cyan)]"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-24 z-50 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-neon-cyan/40 bg-bg/90 text-neon-cyan shadow-[0_0_15px_rgba(0,255,242,0.2)] backdrop-blur-md transition-all hover:scale-110 hover:border-neon-cyan hover:shadow-[0_0_25px_var(--neon-cyan)]"
         title="Open Command Palette (Ctrl + K)"
       >
         <Terminal className="h-5 w-5" />

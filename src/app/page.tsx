@@ -11,6 +11,7 @@ import Marquee from "@/components/Marquee";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Work from "@/components/Work";
+import EngineeringPrinciples from "@/components/EngineeringPrinciples";
 import IncidentSimulator from "@/components/IncidentSimulator";
 import ApiPlayground from "@/components/ApiPlayground";
 import Contact from "@/components/Contact";
@@ -61,6 +62,7 @@ export default function Home() {
         <About />
         <Skills />
         <Work />
+        <EngineeringPrinciples />
         {mode === "engineer" && <IncidentSimulator />}
         <ApiPlayground />
         <Contact />

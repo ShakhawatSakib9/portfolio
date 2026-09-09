@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ArrowRight, Download } from "lucide-react";
-import { Github, Linkedin, Facebook, Instagram } from "./SocialIcons";
+import { Github, Linkedin, Facebook, Instagram, Twitter } from "./SocialIcons";
 import Magnetic from "./Magnetic";
 import HeroPortrait from "./HeroPortrait";
 import { useMode } from "@/context/ModeContext";
@@ -45,8 +45,9 @@ function useTypingRole() {
 
 const socials = [
   { icon: Github, href: "https://github.com/ShakhawatSakib9", label: "GitHub" },
-  { icon: Linkedin, href: "https://www.linkedin.com/in/md-shakhawathossain-0a8ba0352", label: "LinkedIn" },
-  { icon: Facebook, href: "https://www.facebook.com/md.shakhawat.hossain.987218/", label: "Facebook" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/md-shakhawat-hossain-0a8ba0352/", label: "LinkedIn" },
+  { icon: Twitter, href: "https://x.com/shakhawat9sakib", label: "X (Twitter)" },
+  { icon: Facebook, href: "https://www.facebook.com/shakhawatsakib99/", label: "Facebook" },
   { icon: Instagram, href: "https://www.instagram.com/shakhawat_sa_kib/?hl=en", label: "Instagram" },
 ];
 
@@ -75,7 +76,7 @@ export default function Hero({ onUnlockResume }: HeroProps) {
       <div className="pointer-events-none absolute -top-40 -left-40 h-[36rem] w-[36rem] rounded-full bg-[radial-gradient(circle,rgba(14,165,233,0.16),transparent_60%)] blur-2xl" />
       <div className="pointer-events-none absolute -bottom-40 right-0 h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,rgba(0,255,242,0.14),transparent_60%)] blur-2xl" />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-6 sm:px-10 lg:px-16 2xl:px-20 -mt-6 sm:-mt-10 lg:-mt-12">
+      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-4 sm:px-10 lg:px-16 2xl:px-20 -mt-6 sm:-mt-10 lg:-mt-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-8 lg:gap-12 2xl:gap-16">
           {/* Left Column: Bio & Actions */}
           <div className="lg:col-span-7 flex flex-col justify-center">
@@ -84,7 +85,7 @@ export default function Hero({ onUnlockResume }: HeroProps) {
               Available for work
             </div>
 
-            <h1 className="mt-5 text-4xl sm:text-6xl lg:text-7xl font-bold leading-[1.06] tracking-tight">
+            <h1 className="mt-5 text-3xl sm:text-6xl lg:text-7xl font-bold leading-[1.06] tracking-tight">
               <span className="block text-fg-muted text-xl sm:text-2xl lg:text-3xl font-light mb-1 sm:mb-2">
                 Hi, I&apos;m
               </span>
@@ -117,8 +118,10 @@ export default function Hero({ onUnlockResume }: HeroProps) {
               <Magnetic>
                 <a
                   href="/resume/Md.-Shakhawat-Hossain-R-L.pdf"
-                  onClick={handleResumeClick}
-                  data-cursor-label={mode === "engineer" ? "[ UNLOCK VIA BKASH ]" : "[ DOWNLOAD CV ]"}
+                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor-label="[ DOWNLOAD CV · PDF ]"
                   className="inline-flex items-center gap-2 rounded-full border border-border-glow px-7 py-3 font-medium text-fg glow-hover"
                 >
                   <Download className="h-4 w-4" />

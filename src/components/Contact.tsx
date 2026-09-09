@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Mail, MessageSquare, Send, Check } from "lucide-react";
-import { Github, Linkedin, Facebook, Instagram } from "./SocialIcons";
+import { Github, Linkedin, Facebook, Instagram, Twitter } from "./SocialIcons";
 import Magnetic from "./Magnetic";
 
 export default function Contact() {
@@ -59,7 +59,7 @@ export default function Contact() {
       <div className="pointer-events-none absolute bottom-0 left-0 h-[24rem] w-[24rem] rounded-full bg-[radial-gradient(circle,rgba(14,165,233,0.06),transparent_60%)] blur-2xl" />
       <div className="pointer-events-none absolute bottom-0 right-0 h-[24rem] w-[24rem] rounded-full bg-[radial-gradient(circle,rgba(0,255,242,0.06),transparent_60%)] blur-2xl" />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-6 sm:px-10 lg:px-16 2xl:px-20">
+      <div className="relative z-10 mx-auto w-full max-w-[1600px] px-4 sm:px-10 lg:px-16 2xl:px-20">
         <div className="grid grid-cols-1 gap-12 lg:gap-16 lg:grid-cols-12 lg:items-start">
           
           {/* Info Panel (5 cols) */}
@@ -121,8 +121,9 @@ export default function Contact() {
               <div className="flex items-center gap-3.5">
                 {[
                   { icon: Github, href: "https://github.com/ShakhawatSakib9", label: "GitHub" },
-                  { icon: Linkedin, href: "https://www.linkedin.com/in/md-shakhawathossain-0a8ba0352", label: "LinkedIn" },
-                  { icon: Facebook, href: "https://www.facebook.com/md.shakhawat.hossain.987218/", label: "Facebook" },
+                  { icon: Linkedin, href: "https://www.linkedin.com/in/md-shakhawat-hossain-0a8ba0352/", label: "LinkedIn" },
+                  { icon: Twitter, href: "https://x.com/shakhawat9sakib", label: "X (Twitter)" },
+                  { icon: Facebook, href: "https://www.facebook.com/shakhawatsakib99/", label: "Facebook" },
                   { icon: Instagram, href: "https://www.instagram.com/shakhawat_sa_kib/?hl=en", label: "Instagram" },
                 ].map(({ icon: Icon, href, label }) => (
                   <Magnetic key={label} strength={0.4}>
@@ -143,7 +144,7 @@ export default function Contact() {
 
           {/* Form Panel (7 cols) */}
           <div className="lg:col-span-7 reveal">
-            <div className="rounded-3xl border border-border bg-bg-card p-8 sm:p-10 backdrop-blur-md shadow-2xl">
+            <div className="rounded-3xl border border-border bg-bg-card p-4 sm:p-8 md:p-10 backdrop-blur-md shadow-2xl">
               {status === "success" ? (
                 <div className="space-y-4 font-mono text-center py-8 animate-fade-in">
                   <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">

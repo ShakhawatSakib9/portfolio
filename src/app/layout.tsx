@@ -42,7 +42,7 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} antialiased`}
     >
-      <body className="bg-noise">
+      <body>
         <ModeProvider>
           <ThemeWrapper>
             <CustomCursor />

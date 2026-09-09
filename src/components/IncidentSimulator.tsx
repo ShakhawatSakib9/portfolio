@@ -109,7 +109,7 @@ export default function IncidentSimulator() {
     <section className="py-20 bg-bg relative overflow-hidden border-t border-border/80">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(139,92,246,0.04),transparent_60%)]" />
 
-      <div className="relative z-10 mx-auto max-w-5xl px-6">
+      <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto">
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-neon-violet">
@@ -199,7 +199,7 @@ export default function IncidentSimulator() {
                 </div>
 
                 {/* Console Body */}
-                <div className="p-6 space-y-6">
+                <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
                   <div>
                     <span className="font-mono text-[10px] uppercase text-neon-violet tracking-wider">
                       [System Environment Report]
@@ -221,7 +221,7 @@ export default function IncidentSimulator() {
                             ? "text-yellow-400"
                             : log.startsWith("[QUERY]")
                             ? "text-neon-cyan"
-                            : "text-fg-dim"
+                            : "text-slate-400"
                         }
                       >
                         {log}
@@ -304,7 +304,7 @@ export default function IncidentSimulator() {
                   {/* Solution Drawer */}
                   {showSolution && (
                     <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/5 p-4 animate-fade-in">
-                      <span className="font-mono text-[10px] uppercase text-emerald-400 font-semibold block">
+                      <span className="font-mono text-[10px] uppercase text-emerald-700 dark:text-emerald-400 font-bold block">
                         [Production Solution Implemented]
                       </span>
                       <p className="text-xs text-fg-muted leading-relaxed mt-2 font-mono">

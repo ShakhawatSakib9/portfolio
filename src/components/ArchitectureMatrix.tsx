@@ -77,20 +77,20 @@ export default function ArchitectureMatrix() {
       </p>
 
       {/* Select Architecture Toggles */}
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
         {(["monolith", "modular", "microservices"] as ArchitectureType[]).map((arch) => {
           const isActive = selectedArch === arch;
           return (
             <button
               key={arch}
               onClick={() => handleSelect(arch)}
-              className={`p-3 rounded-xl border text-center transition-all ${
+              className={`p-2 sm:p-3 rounded-xl border text-center transition-all ${
                 isActive
                   ? "border-neon-cyan bg-neon-cyan/5 text-neon-cyan shadow-[0_0_12px_rgba(0,255,242,0.15)]"
                   : "border-border/60 bg-bg/40 text-fg-muted hover:border-fg-dim"
               }`}
             >
-              <span className="block text-[10px] font-bold uppercase tracking-wider">
+              <span className="block text-[9px] sm:text-[10px] font-bold uppercase tracking-wider">
                 {arch === "monolith" && "Monolith"}
                 {arch === "modular" && "Modular Monolith"}
                 {arch === "microservices" && "Microservices"}
